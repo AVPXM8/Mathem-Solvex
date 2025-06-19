@@ -1,4 +1,4 @@
-#Maarula Classes - NIMCET & CUET PG Question Bank
+Maarula Classes - NIMCET & CUET PG Question Bank
 A full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js), providing a comprehensive question bank and practice platform for students preparing for MCA entrance exams. This project features a complete separation between the public-facing Student Portal and a secure, feature-rich Admin Panel for content management.
 
 
