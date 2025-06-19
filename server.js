@@ -23,35 +23,36 @@ if (process.env.NODE_ENV === 'production') {
 // =================================================================
 // START: TEMPORARY ADMIN CREATION ROUTE (CORRECTED FOR USERNAME)
 // =================================================================
-const Admin = require('./models/AdminUser.js'); // Make sure this path is correct
+const Admin = require('./models/AdminUser.js'); 
 const bcrypt = require('bcryptjs');
 
-app.get('/api/setup/create-super-secret-admin', async (req, res) => {
+app.get('/api/setup/create-new-admin', async (req, res) => {
   try {
-    // --- CONFIGURE YOUR ADMIN DETAILS ---
-    const adminUsername = 'admin'; // Change this to your desired username
-    const adminPassword = 'M@@rul@123'; // Change this to your desired password
+    // --- CONFIGURE YOUR NEW ADMIN DETAILS ---
+    // IMPORTANT: Use a username that does NOT already exist
+    const adminUsername = 'admin'; //  
+    const adminPassword = 'M@@rul@123'; // <<<  
     // ------------------------------------
 
-    const adminExists = await Admin.findOne({ username: adminUsername }); // Find by username
+    const adminExists = await Admin.findOne({ username: adminUsername });
 
     if (adminExists) {
-      return res.status(400).send('Admin user with this username already exists.');
+      return res.status(400).send('This new username already exists. Please choose a different one.');
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(adminPassword, salt);
 
     const admin = await Admin.create({
-      username: adminUsername, // Create with username
+      username: adminUsername,
       password: hashedPassword,
     });
 
     if (admin) {
       res.status(201).json({
         _id: admin._id,
-        username: admin.username, // Respond with username
-        message: 'Admin user created successfully! PLEASE REMOVE THIS ROUTE NOW.',
+        username: admin.username,
+        message: 'NEW admin user created successfully! PLEASE REMOVE THIS ROUTE NOW.',
       });
     } else {
       res.status(400).send('Invalid admin data.');
