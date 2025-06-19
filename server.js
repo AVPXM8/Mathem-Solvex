@@ -29,8 +29,8 @@ const bcrypt = require('bcryptjs');
 app.get('/api/setup/create-super-secret-admin', async (req, res) => {
   try {
     // --- CONFIGURE YOUR ADMIN DETAILS ---
-    const adminUsername = 'your-admin-username'; // Change this to your desired username
-    const adminPassword = 'your-strong-password'; // Change this to your desired password
+    const adminUsername = 'admin'; // Change this to your desired username
+    const adminPassword = 'M@@rul@123'; // Change this to your desired password
     // ------------------------------------
 
     const adminExists = await Admin.findOne({ username: adminUsername }); // Find by username
