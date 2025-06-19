@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api';
 import ReactPlayer from 'react-player/youtube';
 import styles from './SingleQuestionPage.module.css';
 
 //const API_URL = 'http://localhost:3001/api/questions';
-const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
+//const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
 const SingleQuestionPage = () => {
     const { id } = useParams();
     const [question, setQuestion] = useState(null);
@@ -22,7 +23,8 @@ const SingleQuestionPage = () => {
         setIsSubmitted(false);
         setSelectedOption(null);
 
-        axios.get(`${API_URL}/${id}`)
+        // axios.get(`${API_URL}/${id}`)
+        api.get(`/questions/${id}`)
             .then(res => {
                 setQuestion(res.data);
                 // This will trigger MathJax to re-render any new LaTeX content

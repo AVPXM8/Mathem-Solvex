@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Editor } from '@tinymce/tinymce-react';
 import styles from './AddQuestionPage.module.css';
 
 //const API_URL = 'http://localhost:3001/api/questions';
- const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
+ //const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
 const AddQuestionPage = () => {
     // Get the question ID from the URL. If it exists, we are in "Edit Mode".
     const { id } = useParams();
@@ -130,11 +131,13 @@ const AddQuestionPage = () => {
             
             if (isEditMode) {
                 // If we are editing, send a PUT request to update
-                await axios.put(`${API_URL}/${id}`, submissionData, config);
+                //await axios.put(`${API_URL}/${id}`, submissionData, config);
+                await api.put(`/questions/${id}`, submissionData);
                 alert('Question updated successfully!');
             } else {
                 // If we are adding, send a POST request to create
-                await axios.post(API_URL, submissionData, config);
+                //await axios.post(API_URL, submissionData, config);
+                await api.post('/questions', submissionData);
                 alert('Question added successfully!');
             }
             navigate('/admin/questions'); // Go back to the list page after success

@@ -1,11 +1,12 @@
 // src/pages/ReportIssuePage.jsx
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
+import api from '../api';
 import styles from './AddQuestionPage.module.css'; // We can reuse the admin form styles
 
 //const API_URL = 'http://localhost:3001/api/reports';
-const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/reports';
+//const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/reports';
 
 const ReportIssuePage = () => {
     const { id: questionId } = useParams(); // Get the question ID from the URL
@@ -27,7 +28,7 @@ const ReportIssuePage = () => {
         setSuccess('');
 
         try {
-            await axios.post(API_URL, {
+            await api.post('/reports', {
                 questionId,
                 issueDescription,
             });
