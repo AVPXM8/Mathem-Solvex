@@ -16,10 +16,6 @@ app.use('/api/questions', require('./routes/questionRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
 
-// Basic Welcome Route
-app.get('/', (req, res) => {
-    res.send('Welcome to the Maarula Classes Question Bank API!');
-});
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
@@ -28,6 +24,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
   });
 }
+app.get('/', (req, res) => {
+    res.send('Welcome to the Maarula Classes Question Bank API!');
+});
 // MongoDB Connection and Server Start
 const PORT = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI)
