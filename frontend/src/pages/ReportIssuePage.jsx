@@ -4,7 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './AddQuestionPage.module.css'; // We can reuse the admin form styles
 
-const API_URL = 'http://localhost:3001/api/reports';
+//const API_URL = 'http://localhost:3001/api/reports';
+const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/reports';
 
 const ReportIssuePage = () => {
     const { id: questionId } = useParams(); // Get the question ID from the URL

@@ -4,8 +4,8 @@ import axios from 'axios';
 import ReactPlayer from 'react-player/youtube';
 import styles from './SingleQuestionPage.module.css';
 
-const API_URL = 'http://localhost:3001/api/questions';
-
+//const API_URL = 'http://localhost:3001/api/questions';
+const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
 const SingleQuestionPage = () => {
     const { id } = useParams();
     const [question, setQuestion] = useState(null);

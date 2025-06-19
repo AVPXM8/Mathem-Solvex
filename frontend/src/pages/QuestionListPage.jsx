@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import styles from './QuestionListPage.module.css';
 
-const API_URL = 'http://localhost:3001/api/questions';
-
+//const API_URL = 'http://localhost:3001/api/questions';
+const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
 const QuestionListPage = () => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);

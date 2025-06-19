@@ -7,8 +7,8 @@ import { useAuth } from '../context/AuthContext';
 import { Editor } from '@tinymce/tinymce-react';
 import styles from './AddQuestionPage.module.css';
 
-const API_URL = 'http://localhost:3001/api/questions';
-
+//const API_URL = 'http://localhost:3001/api/questions';
+ const API_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001') + '/api/questions';
 const AddQuestionPage = () => {
     // Get the question ID from the URL. If it exists, we are in "Edit Mode".
     const { id } = useParams();
