@@ -1,114 +1,114 @@
-// require('dotenv').config();
-// const express = require('express');
-// const cors = require('cors');
-// const mongoose = require('mongoose');
-// const path = require('path');
-
-// const app = express();
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.static('public'));
-
-// // API Routes
-// app.use('/api/questions', require('./routes/questionRoutes'));
-// app.use('/api/admin', require('./routes/adminRoutes'));
-// app.use('/api/reports', require('./routes/reportRoutes'));
-
-// // Basic Welcome Route
-// app.get('/', (req, res) => {
-//     res.send('Welcome to the Maarula Classes Question Bank API!');
-// });
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, 'frontend/dist')));
-
-//   // For any route that is not an API route, send the React app's index.html
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
-//   });
-// }
-// // MongoDB Connection and Server Start
-// const PORT = process.env.PORT || 3001;
-// mongoose.connect(process.env.MONGODB_URI)
-//     .then(() => {
-//         console.log('✅ Connected to MongoDB');
-//         app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
-//     })
-//     .catch((err) => console.error('❌ MongoDB Connection Error:', err.message));
-// updated security 
 require('dotenv').config();
-require('express-async-errors'); // Must be at the top
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 
-// Validate environment variables
-if (!process.env.MONGODB_URI || !process.env.JWT_SECRET) {
-    console.error("FATAL ERROR: MONGODB_URI or JWT_SECRET is not defined.");
-    process.exit(1);
-}
-
 const app = express();
 
-// Secure CORS Configuration
-const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? [process.env.PRODUCTION_URL]
-    : ['http://localhost:5173']; // Your React dev server port
-
-const corsOptions = {
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-};
-app.use(cors(corsOptions));
+// Middleware
+app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 // API Routes
 app.use('/api/questions', require('./routes/questionRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
-// (Add your sitemap route here if you implement it)
 
-// Serve Frontend in Production
+// Basic Welcome Route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Maarula Classes Question Bank API!');
+});
 if (process.env.NODE_ENV === 'production') {
-    const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
-    app.use(express.static(frontendBuildPath));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(frontendBuildPath, 'index.html'));
-    });
+  app.use(express.static(path.join(__dirname, 'frontend/dist')));
+
+  // For any route that is not an API route, send the React app's index.html
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
+  });
 }
-
-// Centralized Error Handler
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'An unexpected error occurred!' });
-});
-
-// DB Connection & Server Start
+// MongoDB Connection and Server Start
 const PORT = process.env.PORT || 3001;
-const startServer = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
         console.log('✅ Connected to MongoDB');
-        app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-    } catch (err) {
-        console.error('❌ MongoDB Connection Error:', err.message);
-        process.exit(1);
-    }
-};
+        app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+    })
+    .catch((err) => console.error('❌ MongoDB Connection Error:', err.message));
+// updated security 
+// require('dotenv').config();
+// require('express-async-errors'); // Must be at the top
 
-startServer();
+// const express = require('express');
+// const cors = require('cors');
+// const mongoose = require('mongoose');
+// const path = require('path');
 
-// Graceful Shutdown
-process.on('SIGINT', async () => {
-    await mongoose.connection.close();
-    console.log('MongoDB connection closed due to application termination.');
-    process.exit(0);
-});
+// // Validate environment variables
+// if (!process.env.MONGODB_URI || !process.env.JWT_SECRET) {
+//     console.error("FATAL ERROR: MONGODB_URI or JWT_SECRET is not defined.");
+//     process.exit(1);
+// }
+
+// const app = express();
+
+// // Secure CORS Configuration
+// const allowedOrigins = process.env.NODE_ENV === 'production'
+//     ? [process.env.PRODUCTION_URL]
+//     : ['http://localhost:5173']; // Your React dev server port
+
+// const corsOptions = {
+//     origin: (origin, callback) => {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     }
+// };
+// app.use(cors(corsOptions));
+// app.use(express.json());
+
+// // API Routes
+// app.use('/api/questions', require('./routes/questionRoutes'));
+// app.use('/api/admin', require('./routes/adminRoutes'));
+// app.use('/api/reports', require('./routes/reportRoutes'));
+// // (Add your sitemap route here if you implement it)
+
+// // Serve Frontend in Production
+// if (process.env.NODE_ENV === 'production') {
+//     const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
+//     app.use(express.static(frontendBuildPath));
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.resolve(frontendBuildPath, 'index.html'));
+//     });
+// }
+
+// // Centralized Error Handler
+// app.use((err, req, res, next) => {
+//     console.error(err.stack);
+//     res.status(500).json({ message: 'An unexpected error occurred!' });
+// });
+
+// // DB Connection & Server Start
+// const PORT = process.env.PORT || 3001;
+// const startServer = async () => {
+//     try {
+//         await mongoose.connect(process.env.MONGODB_URI);
+//         console.log('✅ Connected to MongoDB');
+//         app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+//     } catch (err) {
+//         console.error('❌ MongoDB Connection Error:', err.message);
+//         process.exit(1);
+//     }
+// };
+
+// startServer();
+
+// // Graceful Shutdown
+// process.on('SIGINT', async () => {
+//     await mongoose.connection.close();
+//     console.log('MongoDB connection closed due to application termination.');
+//     process.exit(0);
+// });
