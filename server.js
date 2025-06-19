@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 // =================================================================
 // START: TEMPORARY ADMIN CREATION ROUTE (CORRECTED FOR USERNAME)
 // =================================================================
-const Admin = require('./models/adminModel'); // Make sure this path is correct
+const Admin = require('./models/adminUser.js'); // Make sure this path is correct
 const bcrypt = require('bcryptjs');
 
 app.get('/api/setup/create-super-secret-admin', async (req, res) => {
