@@ -1,0 +1,7 @@
+/* src/pages/DashboardPage.module.css - FINAL VERSION */
+.statsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+.statCard { display: flex; align-items: center; background-color: var(--white); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+.statIcon { font-size: 2rem; margin-right: 20px; }
+.statInfo h3 { font-size: 1rem; color: var(--slate-gray); margin-bottom: 5px; font-weight: 500; }
+.statInfo p { font-size: 2.5rem; font-weight: 600; color: var(--dark-navy); line-height: 1; }
+.error { color: #9f1239; background-color: #ffe4e6; padding: 10px; border-radius: 8px; margin-top: 15px; }

@@ -1,0 +1,24 @@
+# This file tells Git which files and folders to ignore.
+
+# Node.js Dependencies
+# This folder is very large and is re-created automatically when you deploy.
+node_modules/
+frontend/node_modules/
+
+# Production Build Folder
+# This folder is re-created automatically every time you build.
+frontend/dist/
+
+# Environment Variables File
+# CRITICAL: This file contains your secret keys and passwords.
+# It should NEVER be uploaded to a public repository.
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db

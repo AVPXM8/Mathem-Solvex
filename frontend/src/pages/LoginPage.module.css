@@ -1,0 +1,8 @@
+/* for the error message: */
+.error {
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}

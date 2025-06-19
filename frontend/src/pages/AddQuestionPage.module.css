@@ -1,0 +1,32 @@
+/* src/pages/AddQuestionPage.module.css */
+.container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; }
+.container h1 { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.inputGroup { margin-bottom: 25px; }
+.inputGroup label { display: block; font-weight: 500; margin-bottom: 8px; color: #0f172a; }
+.inputGroup input[type="text"], .inputGroup input[type="number"], .inputGroup select { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 1rem; }
+.optionContainer { border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+.optionLabel { font-weight: 600; margin-bottom: 10px; }
+.optionMeta { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.fileLabel { font-size: 0.9rem; font-weight: 400; color: #64748b; }
+.radioLabel { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+.submitBtn { background-color: #0057ff; color: white; padding: 12px 25px; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+.submitBtn:disabled { background-color: #64748b; }
+.error { color: #d8000c; background-color: #ffdddd; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+/* To style the new textarea and success message for report question */
+ .textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.success {
+    color: #166534;
+    background-color: #dcfce7;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}

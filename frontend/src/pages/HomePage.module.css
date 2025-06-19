@@ -1,0 +1,19 @@
+/* src/pages/HomePage.module.css - FINAL VERSION */
+.hero { text-align: center; padding: 60px 20px; }
+.hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: var(--dark-navy); }
+.hero p { font-size: 1.2rem; color: var(--slate-gray); max-width: 600px; margin: 0 auto 30px; }
+.buttonContainer { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.ctaButton { background-color: var(--primary-blue); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; }
+.ctaButton:hover { background-color: #0048d6; transform: translateY(-2px); }
+
+/* New Promo Section Styles */
+.promoSection { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--white); padding: 50px; border-radius: 16px; margin-top: 60px; }
+.promoContent h2 { font-size: 2rem; font-weight: 600; margin-bottom: 15px; }
+.promoContent p { font-size: 1.1rem; color: var(--slate-gray); margin-bottom: 30px; }
+.promoButton { background-color: #10b981; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: 600; display: inline-block; }
+.promoImage img { width: 75%; border-radius: 15px; }
+
+@media (max-width: 768px) {
+    .promoSection { grid-template-columns: 1fr; text-align: center; }
+    .hero h1 { font-size: 2rem; }
+}
