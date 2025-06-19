@@ -18,6 +18,53 @@ app.use('/api/reports', require('./routes/reportRoutes'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'frontend/dist')));
+  // ... after your other app.use('/api/...') routes
+
+// =================================================================
+// START: TEMPORARY ADMIN CREATION ROUTE (CORRECTED FOR USERNAME)
+// =================================================================
+const Admin = require('./models/adminModel'); // Make sure this path is correct
+const bcrypt = require('bcryptjs');
+
+app.get('/api/setup/create-super-secret-admin', async (req, res) => {
+  try {
+    // --- CONFIGURE YOUR ADMIN DETAILS ---
+    const adminUsername = 'your-admin-username'; // Change this to your desired username
+    const adminPassword = 'your-strong-password'; // Change this to your desired password
+    // ------------------------------------
+
+    const adminExists = await Admin.findOne({ username: adminUsername }); // Find by username
+
+    if (adminExists) {
+      return res.status(400).send('Admin user with this username already exists.');
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(adminPassword, salt);
+
+    const admin = await Admin.create({
+      username: adminUsername, // Create with username
+      password: hashedPassword,
+    });
+
+    if (admin) {
+      res.status(201).json({
+        _id: admin._id,
+        username: admin.username, // Respond with username
+        message: 'Admin user created successfully! PLEASE REMOVE THIS ROUTE NOW.',
+      });
+    } else {
+      res.status(400).send('Invalid admin data.');
+    }
+  } catch (error) {
+    res.status(500).send('Server Error: ' + error.message);
+  }
+});
+// =================================================================
+// END: TEMPORARY ADMIN CREATION ROUTE
+// =================================================================
+
+// ... your static file serving block starts here
 
   // For any route that is not an API route, send the React app's index.html
   app.get('*', (req, res) => {
