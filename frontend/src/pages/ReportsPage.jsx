@@ -1,11 +1,9 @@
-// src/pages/ReportsPage.jsx
+// src/pages/ReportsPage.jsx - FINAL CORRECTED VERSION
+
 import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
 import api from '../api'; // Use our central API handler
 import { useAuth } from '../context/AuthContext';
 import styles from './QuestionListPage.module.css'; // We can reuse the same table styles
-
-const API_URL = 'http://localhost:3001/api/reports';
 
 const ReportsPage = () => {
     const [reports, setReports] = useState([]);
@@ -16,8 +14,7 @@ const ReportsPage = () => {
         const fetchReports = async () => {
             if (!token) return setLoading(false);
             try {
-                const config = { headers: { Authorization: `Bearer ${token}` } };
-                //const response = await axios.get(API_URL, config);
+                // This API call is now simpler
                 const response = await api.get('/reports');
                 setReports(response.data);
             } catch (error) {
@@ -32,8 +29,7 @@ const ReportsPage = () => {
     const handleResolve = async (id) => {
         if (window.confirm('Are you sure you want to mark this report as resolved? It will be deleted.')) {
             try {
-                //const config = { headers: { Authorization: `Bearer ${token}` } };
-                //await axios.delete(`<span class="math-inline">\{API\_URL\}/</span>{id}`, config);
+                // This delete call is now simpler and doesn't need a config object
                 await api.delete(`/reports/${id}`);
                 setReports(reports.filter((report) => report._id !== id));
                 alert('Report resolved and removed.');
@@ -76,7 +72,7 @@ const ReportsPage = () => {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="4">No issues reported yet.</td>
+                            <td colSpan="4">No issues have been reported yet.</td>
                         </tr>
                     )}
                 </tbody>
