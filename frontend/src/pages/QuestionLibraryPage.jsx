@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api'; // Use our central API handler import axios from 'axios';
 import styles from './QuestionLibraryPage.module.css';
 
 const QuestionLibraryPage = () => {
@@ -14,7 +14,8 @@ const QuestionLibraryPage = () => {
 
     // Fetch filter options (like all subjects, years, etc.) when the page loads
     useEffect(() => {
-        axios.get('http://localhost:3001/api/questions/filters')
+        api.get('/questions/filters')
+        //axios.get('http://localhost:3001/api/questions/filters')
             .then(res => setFilterOptions(res.data))
             .catch(err => console.error("Failed to fetch filter options", err));
     }, []);
@@ -23,7 +24,8 @@ const QuestionLibraryPage = () => {
     useEffect(() => {
         setLoading(true);
         const currentParams = Object.fromEntries([...searchParams]);
-        axios.get('http://localhost:3001/api/questions', { params: currentParams })
+        //axios.get('http://localhost:3001/api/questions', { params: currentParams })
+        api.get('/questions', { params: currentParams })
             .then(res => setQuestions(res.data))
             .catch(err => console.error("Failed to fetch questions", err))
             .finally(() => setLoading(false));

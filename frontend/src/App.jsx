@@ -51,6 +51,8 @@ function App() {
                 <Route path="reports" element={<ReportsPage />} />
                 <Route index element={<Navigate to="dashboard" />} />
             </Route>
+             {/* Any other URL that doesn't match will be redirected to the public homepage */}
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     </AuthProvider>
   );
