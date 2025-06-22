@@ -1,4 +1,4 @@
-/* src/pages/AddQuestionPage.module.css */
+src/pages/AddQuestionPage.module.css
 .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; }
 .container h1 { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }

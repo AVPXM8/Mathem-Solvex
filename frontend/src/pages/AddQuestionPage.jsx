@@ -43,7 +43,9 @@ const AddQuestionPage = () => {
     useEffect(() => {
         if (isEditMode) {
             setLoading(true);
-            axios.get(`${API_URL}/${id}`)
+            //axios.get(`${API_URL}/${id}`)
+            // This now correctly uses our central 'api' handler to fetch the question
+            api.get(`/questions/${id}`)
                 .then(res => {
                     // Populate the form with data from the database
                     setFormData({
@@ -152,7 +154,7 @@ const AddQuestionPage = () => {
     
     // Configuration for the TinyMCE editor
     const editorConfig = {
-    height: 150,
+    height: 250,
     menubar: false,
     plugins: 'lists link image charmap searchreplace visualblocks wordcount codesample',
     // We have added 'superscript subscript' to the toolbar
@@ -205,7 +207,7 @@ const AddQuestionPage = () => {
                     {formData.options.map((option, index) => (
                         <div key={index} className={styles.optionContainer}>
                             <p className={styles.optionLabel}>Option {index + 1}</p>
-                            <Editor apiKey={tinymceApiKey} value={option.text} onEditorChange={(content) => handleEditorChange(content, 'text', index)} init={{...editorConfig, height: 100}} />
+                            <Editor apiKey={tinymceApiKey} value={option.text} onEditorChange={(content) => handleEditorChange(content, 'text', index)} init={{...editorConfig, height: 150}} />
                             <div className={styles.optionMeta}>
                                 <label className={styles.fileLabel}>Image for Option {index + 1} (Optional):</label>
                                 <input type="file" name={`option_${index}_image`} onChange={handleFileChange} accept="image/*" />

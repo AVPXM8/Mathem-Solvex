@@ -1,27 +1,56 @@
-/* src/pages/QuestionListPage.module.css */
+/* src/pages/QuestionListPage.module.css - FINAL ENHANCED VERSION */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
 .container h1 {
-    margin-bottom: 5px;
+    font-size: 2rem;
 }
 .container p {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: var(--slate-gray);
+    font-size: 1.1rem;
+}
+.addBtn {
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.addBtn:hover {
+    background-color: #0048d6;
+}
+.tableWrapper {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden; /* This makes the corner radius apply to the table */
 }
 .questionsTable {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 .questionsTable th, .questionsTable td {
-    padding: 15px;
+    padding: 16px 20px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
 .questionsTable th {
-    background-color: var(--light-gray);
+    background-color: #f8fafc;
     font-weight: 600;
+    color: var(--slate-gray);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 .questionsTable tbody tr:last-child td {
     border-bottom: none;
@@ -29,30 +58,39 @@
 .questionsTable tbody tr:hover {
     background-color: #f9fafb;
 }
+.questionPreview {
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.actionsHeader {
+    text-align: right !important;
+}
+.actionsCell {
+    white-space: nowrap;
+    text-align: right;
+}
 .editBtn, .deleteBtn {
     border: none;
-    padding: 8px 12px;
+    padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 500;
-    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+.editBtn:hover, .deleteBtn:hover {
+    transform: translateY(-1px);
 }
 .editBtn {
     background-color: #e0e7ff;
     color: #4338ca;
+    text-decoration: none;
+    display: inline-block;
 }
 .deleteBtn {
-    background-color: #ffe4e6;
+    background-color: #fee2e2;
     color: #9f1239;
-}
-.actionsCell {
-    white-space: nowrap;
-}
-.statusPending {
-    background-color: #fffbeb;
-    color: #b45309;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-weight: 500;
-    font-size: 0.8rem;
 }

@@ -20,7 +20,7 @@
 .hamburger { display: none; /* Hidden on desktop */ font-size: 1.8rem; background: none; border: none; cursor: pointer; }
 .mobileNav { display: none; /* Hidden on desktop */ }
 
-.mainContent { flex-grow: 1; padding: 40px 20px; max-width: 1200px; width: 100%; margin: 0 auto; }
+.mainContent { flex-grow: 1; padding: 40px 20px; max-width: 1100px; width: 100%; margin: 0 auto; }
 .footer { background-color: #0f172a; color: #cbd5e1; padding: 50px 20px 20px; }
 /* New Footer Styles */
 .footer { background-color: #0f172a; color: #cbd5e1; padding: 50px 20px 20px; }
