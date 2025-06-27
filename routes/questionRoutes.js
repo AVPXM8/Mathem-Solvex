@@ -10,7 +10,8 @@ const {
     updateQuestion, 
     deleteQuestion, 
     getQuestionStats,
-    getFilterOptions 
+    getFilterOptions,
+    getRelatedQuestions
 } = require('../controllers/questionController');
 
 const { protect } = require('../middleware/authMiddleware');
@@ -32,6 +33,7 @@ router.get('/filters', getFilterOptions);
 
 // GET /api/questions/stats - Gets dashboard stats (Protected)
 router.get('/stats', protect, getQuestionStats);
+router.get('/:id/related', getRelatedQuestions);
 
 // ===--- General Routes ---===
 

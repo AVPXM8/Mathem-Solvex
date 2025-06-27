@@ -28,6 +28,7 @@ const questionSchema = new mongoose.Schema({
     },
     topic: {
         type: String,
+        required:true,
         trim: true
     },
     exam: {

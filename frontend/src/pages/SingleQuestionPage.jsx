@@ -11,33 +11,65 @@ const SingleQuestionPage = () => {
     const { id } = useParams();
     const [question, setQuestion] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [relatedQuestions, setRelatedQuestions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
 
     // This hook will now automatically handle MathJax rendering whenever the 'question' data changes
-    useMathJax([question]);
+    useMathJax([question, relatedQuestions]);
 
+    // useEffect(() => {
+    //     setLoading(true);
+    //     // Reset all states when a new question is loaded for a clean slate
+    //     setShowExplanation(false);
+    //     setShowVideo(false);
+    //     setIsSubmitted(false);
+    //     setSelectedOption(null);
+    //     setRelatedQuestions([]);
+
+    //     api.get(`/questions/${id}`)
+    //         .then(res => {
+    //             setQuestion(res.data);
+    //         })
+    //         .catch(err => {
+    //             console.error("Failed to fetch question", err);
+    //             setQuestion(null); // Set to null on error
+    //         })
+    //         .finally(() => {
+    //             setLoading(false);
+    //         });
+    // }, [id]);
+     
     useEffect(() => {
         setLoading(true);
-        // Reset all states when a new question is loaded for a clean slate
+        // Reset all states when a new question is loaded
         setShowExplanation(false);
         setShowVideo(false);
         setIsSubmitted(false);
         setSelectedOption(null);
+        setRelatedQuestions([]);
 
-        api.get(`/questions/${id}`)
-            .then(res => {
-                setQuestion(res.data);
-            })
-            .catch(err => {
-                console.error("Failed to fetch question", err);
-                setQuestion(null); // Set to null on error
-            })
-            .finally(() => {
+        const fetchQuestionData = async () => {
+            try {
+                // Fetch the main question
+                const questionRes = await api.get(`/questions/${id}`);
+                setQuestion(questionRes.data);
+
+                // After the main question is fetched, fetch the related questions
+                const relatedRes = await api.get(`/questions/${id}/related`);
+                setRelatedQuestions(relatedRes.data);
+
+            } catch (err) {
+                console.error("Failed to fetch question data", err);
+                setQuestion(null);
+            } finally {
                 setLoading(false);
-            });
+            }
+        };
+
+        fetchQuestionData();
     }, [id]);
 
     const handleOptionSelect = (index) => {
@@ -147,6 +179,21 @@ const SingleQuestionPage = () => {
                     </div>
                 </div>
             )}
+
+             {relatedQuestions.length > 0 && (
+                        <div className={styles.relatedBox}>
+                            <h3>Related Questions</h3>
+                            <div className={styles.relatedList}>
+                                {relatedQuestions.map(relatedQ => (
+                                    <Link to={`/question/${relatedQ._id}`} key={relatedQ._id} className={styles.relatedItem}>
+                                        <div dangerouslySetInnerHTML={{ __html: relatedQ.questionText.substring(0, 150) + '...' }}></div>
+                                        <span>&rsaquo;</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
              <div className={styles.reportSection}>
                 <Link to={`/report-issue/${id}`}>Report an issue with this question</Link>
             </div>

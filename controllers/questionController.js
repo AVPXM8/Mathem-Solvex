@@ -150,3 +150,27 @@ exports.getFilterOptions = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
+
+exports.getRelatedQuestions = async (req, res) => {
+    try {
+        const originalQuestion = await Question.findById(req.params.id);
+        if (!originalQuestion) {
+            return res.status(404).json({ message: 'Original question not found' });
+        }
+
+        // Find other questions with the same TOPIC and EXAM
+        const relatedQuestions = await Question.find({
+            topic: originalQuestion.topic, // Search by topic
+            exam: originalQuestion.exam,
+            _id: { $ne: req.params.id } // Exclude the current question
+        })
+        .limit(5)
+        .select('questionText exam subject topic'); // Include topic in the response
+
+        res.status(200).json(relatedQuestions);
+
+    } catch (error) {
+        console.error('Error fetching related questions:', error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};

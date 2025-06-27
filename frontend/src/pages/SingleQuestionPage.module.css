@@ -191,3 +191,51 @@
     .optionsGrid { grid-template-columns: 1fr; } 
     .questionCard { padding: 1.5rem; }
 }
+/* ADD THIS TO THE BOTTOM OF SingleQuestionPage.module.css */
+
+.relatedBox {
+    margin-top: 40px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--white);
+}
+
+.relatedBox h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.relatedList {
+    display: flex;
+    flex-direction: column;
+}
+
+.relatedItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--dark-navy);
+    transition: background-color 0.2s;
+}
+
+.relatedItem:last-child {
+    border-bottom: none;
+}
+
+.relatedItem:hover {
+    color: var(--primary-blue);
+}
+
+.relatedItem span {
+    font-size: 1.5rem;
+    color: var(--slate-gray);
+    margin-left: 20px;
+}
+
+
+
+

@@ -11,7 +11,7 @@ const AddQuestionPage = () => {
     const isEditMode = Boolean(id);
 
     const [formData, setFormData] = useState({
-        exam: 'NIMCET', subject: '', year: new Date().getFullYear(),
+        exam: 'NIMCET', subject: '',topic: '', year: new Date().getFullYear(),
         questionText: '', explanationText: '', videoURL: '',
         options: [
             { text: '', imageURL: '', isCorrect: true }, { text: '', imageURL: '', isCorrect: false },
@@ -67,6 +67,7 @@ const AddQuestionPage = () => {
         const submissionData = new FormData();
         submissionData.append('exam', formData.exam);
         submissionData.append('subject', formData.subject);
+        submissionData.append('topic', formData.topic);
         submissionData.append('year', formData.year);
         submissionData.append('questionText', formData.questionText);
         submissionData.append('explanationText', formData.explanationText);
@@ -125,6 +126,12 @@ const AddQuestionPage = () => {
                         <label>Subject</label>
                         <input type="text" name="subject" value={formData.subject} onChange={handleInputChange} placeholder="e.g., Mathematics" required />
                     </div>
+
+                    <div className={styles.inputGroup}>
+                        <label>Topic</label>
+                          <input type="text" name="topic" value={formData.topic} onChange={handleInputChange} placeholder="e.g., Probability" required />
+                      </div>
+
                      <div className={styles.inputGroup}>
                         <label>Year</label>
                         <input type="number" name="year" value={formData.year} onChange={handleInputChange} placeholder="e.g., 2024" required />
