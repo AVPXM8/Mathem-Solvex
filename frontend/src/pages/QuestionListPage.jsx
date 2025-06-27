@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // This component is for navigation
 import api from '../api';
 import styles from './QuestionListPage.module.css';
+import MathPreview from '../components/MathPreview';
+
 
 const QuestionListPage = () => {
     const [questions, setQuestions] = useState([]);
@@ -63,11 +65,22 @@ const QuestionListPage = () => {
                                 <tr key={question._id}>
                                     <td>{question.exam}</td>
                                     <td>{question.subject}</td>
-                                    <td>
+                                    {/* <td>
                                         <div className={styles.questionPreview}>
                                             {question.questionText.replace(/<[^>]+>/g, '').substring(0, 100)}...
                                         </div>
-                                    </td>
+                                    </td> */}
+
+                                    {/* // here update for better maths  */}
+                                    <td>
+  <div className={styles.questionPreview}>
+    <MathPreview
+      latexString={question.questionText}
+      style={{ maxWidth: '400px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+    />
+  </div>
+</td>
+
                                     <td className={styles.actionsCell}>
                                         {/* 👇 THIS IS THE FIX: The Edit button is now a Link 👇 */}
                                         <Link to={`/admin/questions/edit/${question._id}`} className={styles.editBtn}>

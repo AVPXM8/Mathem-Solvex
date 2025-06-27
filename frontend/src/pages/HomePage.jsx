@@ -23,7 +23,7 @@ const HomePage = () => {
                     <a href="https://play.google.com/store/apps/details?id=com.maarula.classes&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" className={styles.promoButton}>Download The App</a>
                 </div>
                 <div className={styles.promoImage}>
-                    <img src="/success-stories.jpg" alt="Student Success Stories"/>
+                    <img src="/success-stories.jpg" alt="Student Success Stories"width="560" height="560"/>
                 </div>
             </div>
         </>

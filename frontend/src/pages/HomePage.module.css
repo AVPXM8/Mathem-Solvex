@@ -17,3 +17,17 @@
     .promoSection { grid-template-columns: 1fr; text-align: center; }
     .hero h1 { font-size: 2rem; }
 }
+/* ADD THESE STYLES TO HomePage.module.css */
+
+.promoImageWrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* This creates a square box that reserves space */
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.promoImageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image fills the space without distortion */
+}

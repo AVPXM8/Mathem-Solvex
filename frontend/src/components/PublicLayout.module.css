@@ -56,3 +56,20 @@
         border-bottom: none;
     }
 }
+/* ADD THIS CODE TO THE BOTTOM OF YOUR CSS FILE */
+
+/* --- Responsive Styles for Mobile Footer --- */
+@media (max-width: 768px) {
+    .footerGrid {
+        /* This will center-align all text inside the footer columns on mobile */
+        text-align: center;
+        gap: 40px; /* This adds more vertical space between sections */
+    }
+
+    .footerColumn a {
+        /* This helps to center the icon and text together properly */
+        display: inline-flex; 
+        align-items: center;
+        justify-content: center;
+    }
+}

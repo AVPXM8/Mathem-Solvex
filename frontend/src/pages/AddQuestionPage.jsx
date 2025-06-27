@@ -1,4 +1,4 @@
-// src/pages/AddQuestionPage.jsx - FINAL VERSION WITH CORRECTED UI
+// For Admin add question page
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
@@ -94,7 +94,7 @@ const AddQuestionPage = () => {
         }
     };
     // --- End of handler functions ---
-    
+    // configuration for the tinymice editor
     const editorConfig = {
         height: 250,
         menubar: false,

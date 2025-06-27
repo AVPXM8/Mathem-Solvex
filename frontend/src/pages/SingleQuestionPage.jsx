@@ -1,9 +1,10 @@
-// src/pages/SingleQuestionPage.jsx - FINAL ENHANCED VERSION
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
 import ReactPlayer from 'react-player/youtube';
+import useMathJax from '../hooks/useMathJax'; // Import our custom hook
+import MathPreview from '../components/MathPreview';
+
 import styles from './SingleQuestionPage.module.css';
 
 const SingleQuestionPage = () => {
@@ -15,9 +16,12 @@ const SingleQuestionPage = () => {
     const [showExplanation, setShowExplanation] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
 
+    // This hook will now automatically handle MathJax rendering whenever the 'question' data changes
+    useMathJax([question]);
+
     useEffect(() => {
         setLoading(true);
-        // Reset all states when a new question is loaded
+        // Reset all states when a new question is loaded for a clean slate
         setShowExplanation(false);
         setShowVideo(false);
         setIsSubmitted(false);
@@ -26,17 +30,14 @@ const SingleQuestionPage = () => {
         api.get(`/questions/${id}`)
             .then(res => {
                 setQuestion(res.data);
-                // THIS IS THE FIX FOR THE MATH RENDERING
-                // After the question data is loaded, we tell MathJax to look for new math on the page.
-                // The small delay ensures React has finished updating the page.
-                setTimeout(() => {
-                    if (window.MathJax) {
-                        window.MathJax.typeset();
-                    }
-                }, 100);
             })
-            .catch(err => console.error("Failed to fetch question", err))
-            .finally(() => setLoading(false));
+            .catch(err => {
+                console.error("Failed to fetch question", err);
+                setQuestion(null); // Set to null on error
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [id]);
 
     const handleOptionSelect = (index) => {
@@ -65,7 +66,9 @@ const SingleQuestionPage = () => {
                     <span>{question.exam} | {question.subject} | {question.year}</span>
                 </div>
                 
-                <div className={styles.questionBody} dangerouslySetInnerHTML={{ __html: question.questionText }}></div>
+                {/* <div className={styles.questionBody} dangerouslySetInnerHTML={{ __html: question.questionText }}></div> */}
+                <MathPreview latexString={question.questionText} className={styles.questionBody} />
+
                 {question.questionImageURL && <img src={question.questionImageURL} alt="Question illustration" className={styles.mainImage} />}
 
                 <h3 className={styles.optionsHeader}>Choose the correct answer:</h3>
@@ -73,11 +76,8 @@ const SingleQuestionPage = () => {
                     {question.options.map((option, index) => {
                         let buttonClass = styles.optionButton;
                         if (isSubmitted) {
-                            if (option.isCorrect) {
-                                buttonClass += ` ${styles.correct}`;
-                            } else if (index === selectedOption) {
-                                buttonClass += ` ${styles.incorrect}`;
-                            }
+                            if (option.isCorrect) buttonClass += ` ${styles.correct}`;
+                            else if (index === selectedOption) buttonClass += ` ${styles.incorrect}`;
                         } else if (index === selectedOption) {
                             buttonClass += ` ${styles.selected}`;
                         }
@@ -85,7 +85,9 @@ const SingleQuestionPage = () => {
                         return (
                             <button key={index} className={buttonClass} onClick={() => handleOptionSelect(index)} disabled={isSubmitted}>
                                 <span className={styles.optionLetter}>{String.fromCharCode(65 + index)}</span>
-                                <div className={styles.optionContent} dangerouslySetInnerHTML={{ __html: option.text || '' }}></div>
+                                {/* <div className={styles.optionContent} dangerouslySetInnerHTML={{ __html: option.text || '' }}></div> */}
+                                <MathPreview latexString={option.text || ''} className={styles.optionContent} />
+
                                 {option.imageURL && <img src={option.imageURL} alt={`Option ${index + 1}`} className={styles.optionImage} />}
                             </button>
                         );
@@ -102,7 +104,7 @@ const SingleQuestionPage = () => {
             {isSubmitted && (
                 <div className={styles.feedbackCard}>
                     <p className={isCorrect ? styles.correctText : styles.incorrectText}>
-                        {isCorrect ? '✅ Correct Answer! Well done.' : 'Ohh! you clicked incorrect option The correct answer is highlighted in green.'}
+                        {isCorrect ? '✅ Correct Answer! Well done.' : '❌ Incorrect. The correct answer is highlighted in green.'}
                     </p>
                     <div className={styles.buttonGroup}>
                         <button onClick={() => setShowExplanation(!showExplanation)} className={styles.explanationBtn}>
@@ -120,7 +122,13 @@ const SingleQuestionPage = () => {
             {showExplanation && (
                 <div className={styles.explanationBox}>
                     <h3>Explanation</h3>
-                    {question.explanationText ? <div dangerouslySetInnerHTML={{ __html: question.explanationText }}></div> : <p>No text explanation available.</p>}
+                    {/* {question.explanationText ? <div dangerouslySetInnerHTML={{ __html: question.explanationText }}></div> : <p>No text explanation available.</p>} */}
+                    {question.explanationText ? (
+  <MathPreview latexString={question.explanationText} />
+) : (
+  <p>No text explanation available.</p>
+)}
+
                     {question.explanationImageURL && <img src={question.explanationImageURL} alt="Explanation diagram" className={styles.mainImage} />}
                 </div>
             )}
@@ -145,5 +153,6 @@ const SingleQuestionPage = () => {
         </div>
     );
 };
+
 
 export default SingleQuestionPage;

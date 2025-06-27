@@ -14,7 +14,7 @@ const PublicLayout = () => {
             <header className={styles.header}>
                 <div className={styles.headerContent}>
                     <Link to="/" className={styles.logoContainer}>
-                        <img src="/maarulalogo.png" alt="Maarula Classes Logo" className={styles.logo} />
+                        <img src="/maarulalogo.png" alt="Maarula Classes Logo" className={styles.logo} width="50" height="50" />
                         <div className={styles.title}>
                             <h1>Maarula Classes</h1>
                             <p>Question Bank & PYQs</p>
@@ -47,7 +47,7 @@ const PublicLayout = () => {
                         <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
                         <NavLink to="/questions?exam=NIMCET" onClick={() => setIsMenuOpen(false)}>NIMCET</NavLink>
                         <NavLink to="/questions?exam=CUET PG" onClick={() => setIsMenuOpen(false)}>CUET PG</NavLink>
-                        <a href="https://maarula.in/courses" target="_blank" rel="noopener noreferrer">Our Courses</a>
+                        <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Our Courses</a>
                     </nav>
                 )}
             </header>
@@ -67,14 +67,14 @@ const PublicLayout = () => {
                         <h4>Quick Links</h4>
                         <Link to="/questions?exam=NIMCET">NIMCET Questions</Link>
                         <Link to="/questions?exam=CUET PG">CUET PG Questions</Link>
-                        <a href="https://maarula.in/courses" target="_blank" rel="noopener noreferrer">Join Our Courses</a>
+                        <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Join Our Courses</a>
                     </div>
                     <div className={styles.footerColumn}>
-                        <h4>Connect With Us</h4>
-                        <a href="https://www.youtube.com/c/maarulaclasses" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i> YouTube</a>
-                        <a href="https://www.https://www.instagram.com/maarula.classes?igsh=MWZleW02OWFyZjByMQ==" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i> Instagram</a>
-                        <a href="https://t.me/maarulaclasses" target="_blank" rel="noopener noreferrer"><i className="fab fa-telegram"></i> Telegram</a>
-                    </div>
+    <h4>Connect With Us</h4>
+    <a href="https://www.youtube.com/c/maarulaclasses" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube"></i> YouTube</a>
+    <a href="https://www.instagram.com/maarula_classes/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i> Instagram</a>
+    <a href="https://t.me/maarulaclasses" target="_blank" rel="noopener noreferrer"><i className="fab fa-telegram"></i> Telegram</a>
+</div>
                     <div className={styles.footerColumn}>
                         <h4>Download Our App</h4>
                         <a href="https://play.google.com/store/apps/details?id=com.maarula.classes&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" className={styles.appLink}>
