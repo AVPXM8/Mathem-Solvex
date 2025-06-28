@@ -1,17 +1,21 @@
-/* src/index.css */
-:root {
-    font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
+/* src/index.css - FINAL ENHANCED VERSION */
 
+/* 1. Import the new Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* 2. Define a more refined color palette */
+:root {
     --primary-blue: #0057FF;
-    --dark-navy: #0F172A;
-    --slate-gray: #64748B;
-    --background-color: #F1F5F9;
+    --primary-blue-hover: #0048d6;
+    --dark-navy: #0f172a;
+    --slate-gray: #64748b;
+    --light-gray: #f8fafc; /* Lighter gray for backgrounds */
+    --background-color: #f1f5f9;
     --white: #FFFFFF;
-    --border-color: #E2E8F0;
+    --border-color: #e2e8f0;
 }
 
+/* 3. Set up a better global font and reset */
 * {
     margin: 0;
     padding: 0;
@@ -19,5 +23,10 @@
 }
 
 body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: var(--background-color);
+    color: var(--dark-navy);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
