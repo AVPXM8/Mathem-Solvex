@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import api from '../api';
 import useMathJax from '../hooks/useMathJax';
+import { QuestionListSkeleton } from '../components/SkeletonLoader';  
 import styles from './QuestionLibraryPage.module.css';
 
 const QuestionLibraryPage = () => {
@@ -74,7 +75,8 @@ const QuestionLibraryPage = () => {
             </div>
 
             <div className={styles.questionList}>
-                {loading ? <p>Loading questions...</p> : 
+                    {loading ? (
+                    <QuestionListSkeleton />) : 
                  questions.length > 0 ? (
                     questions.map(q => (
                         <Link to={`/question/${q._id}`} key={q._id} className={styles.questionCard}>

@@ -1,0 +1,58 @@
+.skeleton {
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.questionList {
+    display: grid;
+    gap: 25px;
+}
+
+.questionCard {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    padding: 25px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    width: 80px;
+    height: 28px;
+    border-radius: 20px;
+}
+
+.text {
+    height: 20px;
+    margin-bottom: 12px;
+}
+
+.text_short {
+    height: 20px;
+    width: 70%;
+}
+
+.viewLink {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f3f4f6;
+    height: 45px;
+    border-radius: 8px;
+}
