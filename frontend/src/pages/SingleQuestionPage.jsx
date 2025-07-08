@@ -1,213 +1,11 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams, Link } from 'react-router-dom';
-// import api from '../api';
-// import ReactPlayer from 'react-player/youtube';
-// import useMathJax from '../hooks/useMathJax'; // Import our custom hook
-// import MathPreview from '../components/MathPreview';
-
-// import styles from './SingleQuestionPage.module.css';
-
-// const SingleQuestionPage = () => {
-//     const { id } = useParams();
-//     const [question, setQuestion] = useState(null);
-//     const [loading, setLoading] = useState(true);
-//     const [relatedQuestions, setRelatedQuestions] = useState([]);
-//     const [selectedOption, setSelectedOption] = useState(null);
-//     const [isSubmitted, setIsSubmitted] = useState(false);
-//     const [showExplanation, setShowExplanation] = useState(false);
-//     const [showVideo, setShowVideo] = useState(false);
-
-//     // This hook will now automatically handle MathJax rendering whenever the 'question' data changes
-//     useMathJax([question, relatedQuestions]);
-
-//     // useEffect(() => {
-//     //     setLoading(true);
-//     //     // Reset all states when a new question is loaded for a clean slate
-//     //     setShowExplanation(false);
-//     //     setShowVideo(false);
-//     //     setIsSubmitted(false);
-//     //     setSelectedOption(null);
-//     //     setRelatedQuestions([]);
-
-//     //     api.get(`/questions/${id}`)
-//     //         .then(res => {
-//     //             setQuestion(res.data);
-//     //         })
-//     //         .catch(err => {
-//     //             console.error("Failed to fetch question", err);
-//     //             setQuestion(null); // Set to null on error
-//     //         })
-//     //         .finally(() => {
-//     //             setLoading(false);
-//     //         });
-//     // }, [id]);
-     
-//     useEffect(() => {
-//         setLoading(true);
-//         // Reset all states when a new question is loaded
-//         setShowExplanation(false);
-//         setShowVideo(false);
-//         setIsSubmitted(false);
-//         setSelectedOption(null);
-//         setRelatedQuestions([]);
-
-//         const fetchQuestionData = async () => {
-//             try {
-//                 // Fetch the main question
-//                 const questionRes = await api.get(`/questions/${id}`);
-//                 setQuestion(questionRes.data);
-
-//                 // After the main question is fetched, fetch the related questions
-//                 const relatedRes = await api.get(`/questions/${id}/related`);
-//                 setRelatedQuestions(relatedRes.data);
-
-//             } catch (err) {
-//                 console.error("Failed to fetch question data", err);
-//                 setQuestion(null);
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchQuestionData();
-//     }, [id]);
-
-//     const handleOptionSelect = (index) => {
-//         if (!isSubmitted) {
-//             setSelectedOption(index);
-//         }
-//     };
-
-//     const handleSubmit = () => {
-//         if (selectedOption === null) {
-//             alert('Please select an option first.');
-//             return;
-//         }
-//         setIsSubmitted(true);
-//     };
-
-//     if (loading) return <div className={styles.loading}>Loading Question...</div>;
-//     if (!question) return <div className={styles.loading}>Question not found or could not be loaded.</div>;
-
-//     const isCorrect = question.options[selectedOption]?.isCorrect;
-
-//     return (
-//         <div className={styles.container}>
-//             <div className={styles.questionCard}>
-//                 <div className={styles.questionHeader}>
-//                     <span>{question.exam} | {question.subject} | {question.year}</span>
-//                 </div>
-                
-//                 {/* <div className={styles.questionBody} dangerouslySetInnerHTML={{ __html: question.questionText }}></div> */}
-//                 <MathPreview latexString={question.questionText} className={styles.questionBody} />
-
-//                 {question.questionImageURL && <img src={question.questionImageURL} alt="Question illustration" className={styles.mainImage} />}
-
-//                 <h3 className={styles.optionsHeader}>Choose the correct answer:</h3>
-//                 <div className={styles.optionsGrid}>
-//                     {question.options.map((option, index) => {
-//                         let buttonClass = styles.optionButton;
-//                         if (isSubmitted) {
-//                             if (option.isCorrect) buttonClass += ` ${styles.correct}`;
-//                             else if (index === selectedOption) buttonClass += ` ${styles.incorrect}`;
-//                         } else if (index === selectedOption) {
-//                             buttonClass += ` ${styles.selected}`;
-//                         }
-                        
-//                         return (
-//                             <button key={index} className={buttonClass} onClick={() => handleOptionSelect(index)} disabled={isSubmitted}>
-//                                 <span className={styles.optionLetter}>{String.fromCharCode(65 + index)}</span>
-//                                 {/* <div className={styles.optionContent} dangerouslySetInnerHTML={{ __html: option.text || '' }}></div> */}
-//                                 <MathPreview latexString={option.text || ''} className={styles.optionContent} />
-
-//                                 {option.imageURL && <img src={option.imageURL} alt={`Option ${index + 1}`} className={styles.optionImage} />}
-//                             </button>
-//                         );
-//                     })}
-//                 </div>
-                
-//                 {!isSubmitted && (
-//                     <div className={styles.submitContainer}>
-//                         <button onClick={handleSubmit} className={styles.submitBtn} disabled={selectedOption === null}>Check Answer</button>
-//                     </div>
-//                 )}
-//             </div>
-
-//             {isSubmitted && (
-//                 <div className={styles.feedbackCard}>
-//                     <p className={isCorrect ? styles.correctText : styles.incorrectText}>
-//                         {isCorrect ? '✅ Correct Answer! Well done.' : '❌ Incorrect. The correct answer is highlighted in green.'}
-//                     </p>
-//                     <div className={styles.buttonGroup}>
-//                         <button onClick={() => setShowExplanation(!showExplanation)} className={styles.explanationBtn}>
-//                             {showExplanation ? 'Hide' : 'Show'} Detailed Explanation
-//                         </button>
-//                         {question.videoURL && (
-//                              <button onClick={() => setShowVideo(!showVideo)} className={styles.explanationBtn}>
-//                                 {showVideo ? 'Hide' : 'Show'} Video Solution
-//                             </button>
-//                         )}
-//                     </div>
-//                 </div>
-//             )}
-
-//             {showExplanation && (
-//                 <div className={styles.explanationBox}>
-//                     <h3>Explanation</h3>
-//                     {/* {question.explanationText ? <div dangerouslySetInnerHTML={{ __html: question.explanationText }}></div> : <p>No text explanation available.</p>} */}
-//                     {question.explanationText ? (
-//   <MathPreview latexString={question.explanationText} />
-// ) : (
-//   <p>No text explanation available.</p>
-// )}
-
-//                     {question.explanationImageURL && <img src={question.explanationImageURL} alt="Explanation diagram" className={styles.mainImage} />}
-//                 </div>
-//             )}
-            
-//             {showVideo && question.videoURL && (
-//                 <div className={styles.explanationBox}>
-//                     <h3>Video Explanation</h3>
-//                     <div className={styles.playerContainer}>
-//                         <ReactPlayer 
-//                             url={question.videoURL} 
-//                             width="100%" 
-//                             height="100%" 
-//                             controls={true}
-//                             className={styles.reactPlayer}
-//                         />
-//                     </div>
-//                 </div>
-//             )}
-
-//              {relatedQuestions.length > 0 && (
-//                         <div className={styles.relatedBox}>
-//                             <h3>Related Questions</h3>
-//                             <div className={styles.relatedList}>
-//                                 {relatedQuestions.map(relatedQ => (
-//                                     <Link to={`/question/${relatedQ._id}`} key={relatedQ._id} className={styles.relatedItem}>
-//                                         <div dangerouslySetInnerHTML={{ __html: relatedQ.questionText.substring(0, 150) + '...' }}></div>
-//                                         <span>&rsaquo;</span>
-//                                     </Link>
-//                                 ))}
-//                             </div>
-//                         </div>
-//                     )}
-
-//              <div className={styles.reportSection}>
-//                 <Link to={`/report-issue/${id}`}>Report an issue with this question</Link>
-//             </div>
-//         </div>
-//     );
-// };
-
-
 // export default SingleQuestionPage;
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
 import ReactPlayer from 'react-player/youtube';
 import useMathJax from '../hooks/useMathJax';
+import MathPreview from '../components/MathPreview';
+import { reRenderMathJax } from '../utils/mathjax';
 import styles from './SingleQuestionPage.module.css';
 
 const SingleQuestionPage = () => {
@@ -258,6 +56,7 @@ const SingleQuestionPage = () => {
     const handleOptionSelect = (index) => {
         if (!isSubmitted) {
             setSelectedOption(index);
+            setTimeout(reRenderMathJax, 0);
         }
     };
 
@@ -267,7 +66,15 @@ const SingleQuestionPage = () => {
             return;
         }
         setIsSubmitted(true);
+        setTimeout(reRenderMathJax, 0);
     };
+    const handleToggleExplanation = () => {
+    setShowExplanation((prev) => {
+        setTimeout(reRenderMathJax, 0);
+        return !prev;
+    });
+};
+
 
     // This is the crucial fix. We show a loading message until the data is ready.
     if (loading) {
@@ -293,7 +100,7 @@ const SingleQuestionPage = () => {
                         <span>{question.exam} | {question.subject} | {question.year}</span>
                     </div>
                     
-                    <div className={styles.questionBody} dangerouslySetInnerHTML={{ __html: question.questionText }}></div>
+                    <MathPreview latexString={question.questionText} className={styles.questionBody} />
                     {question.questionImageURL && <img src={question.questionImageURL} alt="Question" className={styles.mainImage} />}
 
                     <h3 className={styles.optionsHeader}>Choose the correct answer:</h3>
@@ -310,7 +117,7 @@ const SingleQuestionPage = () => {
                             return (
                                 <button key={index} className={buttonClass} onClick={() => handleOptionSelect(index)} disabled={isSubmitted}>
                                     <span className={styles.optionLetter}>{String.fromCharCode(65 + index)}</span>
-                                    <div className={styles.optionContent} dangerouslySetInnerHTML={{ __html: option.text || '' }}></div>
+                                    <MathPreview latexString={option.text || ''} className={styles.optionContent} />
                                     {option.imageURL && <img src={option.imageURL} alt={`Option ${index + 1}`} className={styles.optionImage} />}
                                 </button>
                             );
@@ -330,9 +137,10 @@ const SingleQuestionPage = () => {
                             {isCorrect ? '✅ Correct Answer! Well done.' : '❌ Incorrect. The correct answer is highlighted in green.'}
                         </p>
                         <div className={styles.buttonGroup}>
-                            <button onClick={() => setShowExplanation(!showExplanation)} className={styles.explanationBtn}>
-                                {showExplanation ? 'Hide' : 'Show'} Detailed Explanation
+                            <button onClick={handleToggleExplanation} className={styles.explanationBtn}>
+                                    {showExplanation ? 'Hide' : 'Show'} Detailed Explanation
                             </button>
+
                             {question.videoURL && (
                                 <button onClick={() => setShowVideo(!showVideo)} className={styles.explanationBtn}>
                                     {showVideo ? 'Hide' : 'Show'} Video Solution
@@ -345,7 +153,7 @@ const SingleQuestionPage = () => {
                 {showExplanation && (
                     <div className={styles.explanationBox}>
                         <h3>Explanation</h3>
-                        {question.explanationText ? <div dangerouslySetInnerHTML={{ __html: question.explanationText }}></div> : <p>No text explanation available.</p>}
+                        {question.explanationText ? <MathPreview latexString={question.explanationText} /> : <p>No text explanation available.</p>}
                         {question.explanationImageURL && <img src={question.explanationImageURL} alt="Explanation diagram" className={styles.mainImage} />}
                     </div>
                 )}
@@ -370,7 +178,7 @@ const SingleQuestionPage = () => {
                         <div className={styles.relatedList}>
                             {relatedQuestions.map(q => (
                                 <Link to={`/question/${q._id}`} key={q._id} className={styles.relatedItem}>
-                                    <div dangerouslySetInnerHTML={{ __html: q.questionText.substring(0, 80) + '...' }} />
+                                    <MathPreview latexString={q.questionText.substring(0, 80) + '...'} />
                                     <span>&rsaquo;</span>
                                 </Link>
                             ))}

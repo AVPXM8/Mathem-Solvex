@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
-import styles from './AddQuestionPage.module.css'; // We will continue to reuse these form styles
+import styles from './AddQuestionPage.module.css'; 
+
 
 const ReportIssuePage = () => {
     const { id: questionId } = useParams();

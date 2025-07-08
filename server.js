@@ -19,18 +19,15 @@ app.use('/api/reports', require('./routes/reportRoutes'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'frontend/dist')));
-  // ... after your other app.use('/api/...') routes
-
-// =================================================================
+  
 // START: TEMPORARY ADMIN CREATION ROUTE (CORRECTED FOR USERNAME)
-// =================================================================
+
 const Admin = require('./models/AdminUser.js'); 
 const bcrypt = require('bcryptjs');
 
 app.get('/api/setup/create-new-admin', async (req, res) => {
   try {
-    // --- CONFIGURE YOUR NEW ADMIN DETAILS ---
-    // IMPORTANT: Use a username that does NOT already exist
+  
     const adminUsername = 'admin'; //  
     const adminPassword = 'M@@rul@123'; // <<<  
     // ------------------------------------
@@ -62,13 +59,9 @@ app.get('/api/setup/create-new-admin', async (req, res) => {
     res.status(500).send('Server Error: ' + error.message);
   }
 });
-// =================================================================
+
 // END: TEMPORARY ADMIN CREATION ROUTE
-// =================================================================
 
-// ... your static file serving block starts here
-
-  // For any route that is not an API route, send the React app's index.html
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
   });

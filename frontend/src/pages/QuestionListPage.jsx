@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom'; // This component is for navigation
 import api from '../api';
 import styles from './QuestionListPage.module.css';
 import MathPreview from '../components/MathPreview';
+import toast from 'react-hot-toast';
 
 
 const QuestionListPage = () => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [deletingIds, setDeletingIds] = useState(new Set());
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
@@ -25,15 +26,34 @@ const QuestionListPage = () => {
         fetchQuestions();
     }, []);
 
-    const handleDelete = async (id) => {
+   const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to permanently delete this question?')) {
+            const originalQuestions = [...questions];
+
+            // Instantly add the ID to our 'deleting' set.
+            // This will trigger a CSS animation to hide the row immediately.
+            setDeletingIds(prev => new Set(prev).add(id));
+            
             try {
+                // Send the delete request to the server in the background.
                 await api.delete(`/questions/${id}`);
-                setQuestions(questions.filter((question) => question._id !== id));
-                alert('Question deleted successfully!');
+                
+                // Once the server confirms, permanently remove it from the main state.
+                setQuestions(prev => prev.filter((q) => q._id !== id));
+                toast.success('Question deleted successfully!');
+
             } catch (error) {
-                console.error('Failed to delete question', error);
-                alert('Error: Could not delete the question.');
+                toast.error('Delete failed on server. Restoring question.');
+                // If the delete fails, restore the original list and make the row visible again.
+                setQuestions(originalQuestions);
+                console.error('Failed to delete question:', error);
+            } finally {
+                // Always remove the ID from the deleting set after the operation is complete.
+                setDeletingIds(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(id);
+                    return newSet;
+                });
             }
         }
     };
@@ -62,7 +82,8 @@ const QuestionListPage = () => {
                     <tbody>
                         {questions.length > 0 ? (
                             questions.map((question) => (
-                                <tr key={question._id}>
+                                 <tr key={question._id} className={deletingIds.has(question._id) ? styles.deleting : ''}>
+                                {/* // <tr key={question._id}> */}
                                     <td>{question.exam}</td>
                                     <td>{question.subject}</td>
                                     {/* <td>

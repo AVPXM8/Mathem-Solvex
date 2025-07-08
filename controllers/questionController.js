@@ -12,7 +12,8 @@ exports.getQuestions = async (req, res) => {
         if (year) query.year = year;
         if (search) query.questionText = { $regex: search, $options: 'i' };
         
-        const questions = await Question.find(query).sort({ createdAt: -1 });
+        // const questions = await Question.find(query).sort({ createdAt: -1 });
+        const questions = await Question.find(query).sort({ subject: 1, topic: 1 });
         res.status(200).json(questions);
     } catch (error) {
         res.status(500).json({ message: 'Server Error' });

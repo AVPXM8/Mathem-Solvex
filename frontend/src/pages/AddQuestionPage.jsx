@@ -5,6 +5,7 @@ import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Editor } from '@tinymce/tinymce-react';
 import styles from './AddQuestionPage.module.css';
+import toast from 'react-hot-toast';
 
 const AddQuestionPage = () => {
     const { id } = useParams();
@@ -81,10 +82,10 @@ const AddQuestionPage = () => {
         try {
             if (isEditMode) {
                 await api.put(`/questions/${id}`, submissionData);
-                alert('Question updated successfully!');
+                toast.success('Question updated successfully!');
             } else {
                 await api.post('/questions', submissionData);
-                alert('Question added successfully!');
+                toast.success('Question added successfully!');
             }
             navigate('/admin/questions');
         } catch (err) {

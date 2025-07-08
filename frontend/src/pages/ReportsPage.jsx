@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api'; // Use our central API handler
 import { useAuth } from '../context/AuthContext';
-import styles from './QuestionListPage.module.css'; // We can reuse the same table styles
+import styles from './QuestionListPage.module.css'; 
+import toast from 'react-hot-toast';
 
 const ReportsPage = () => {
     const [reports, setReports] = useState([]);
@@ -32,10 +33,10 @@ const ReportsPage = () => {
                 // This delete call is now simpler and doesn't need a config object
                 await api.delete(`/reports/${id}`);
                 setReports(reports.filter((report) => report._id !== id));
-                alert('Report resolved and removed.');
+                toast.success('Report resolved and removed.');
             } catch (error) {
                 console.error('Failed to delete report', error);
-                alert('Error: Could not remove the report.');
+                toast.error('Error: Could not remove the report.');
             }
         }
     };

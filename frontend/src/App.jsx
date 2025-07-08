@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -30,6 +31,7 @@ const ProtectedRoute = () => {
 function App() {
   return (
     <AuthProvider>
+        <Toaster position="top-center" reverseOrder={false} />
         <Routes>
             {/* === Public Routes (for students) === */}
             <Route path="/" element={<PublicLayout />}>
