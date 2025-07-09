@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+    "@ckeditor/ckeditor5-react": "^10.0.0",
     "@tinymce/tinymce-react": "^6.2.1",
     "@vitejs/plugin-react": "^4.5.2",
     "axios": "^1.10.0",

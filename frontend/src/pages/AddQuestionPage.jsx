@@ -101,7 +101,7 @@ const AddQuestionPage = () => {
         height: 250,
         menubar: false,
         plugins: 'lists link image charmap searchreplace visualblocks wordcount codesample',
-        toolbar: 'undo redo | blocks | bold italic superscript subscript | alignleft aligncenter alignright | bullist numlist | link image charmap codesample',
+        toolbar: 'undo redo | blocks fontfamily fontsize | fontsizeselect | bold italic superscript subscript | alignleft aligncenter alignright | bullist numlist | link image charmap codesample',
     };
 
     if (loading && isEditMode) {
