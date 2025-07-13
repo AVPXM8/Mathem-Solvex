@@ -56,6 +56,8 @@ const SingleQuestionPage = () => {
     const handleOptionSelect = (index) => {
         if (!isSubmitted) {
             setSelectedOption(index);
+            setIsSubmitted(true); // Immediately check the answer
+            setShowExplanation(true); 
             setTimeout(reRenderMathJax, 0);
         }
     };

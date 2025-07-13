@@ -68,7 +68,12 @@
 
 .tags { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 .tag { background-color: #eef2ff; color: #4338ca; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-.questionText { margin-bottom: 20px; line-height: 1.7; }
+.questionText {
+    flex-grow: 1;
+    line-height: 1.7;
+    min-width: 0; 
+}
+
 .viewLink { font-weight: 600; color: var(--primary-blue); margin-top: auto; padding-top: 15px; border-top: 1px solid #f3f4f6; }
 .noResults {
     text-align: center;

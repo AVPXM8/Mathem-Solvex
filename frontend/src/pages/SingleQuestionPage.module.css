@@ -244,7 +244,7 @@
 .pageLayout {
     display: grid;
     grid-template-columns: 1fr; /* Default to single column on mobile */
-    gap: 30px;
+    gap: 20px;
 }
 @media (min-width: 1024px) {
     .pageLayout {
