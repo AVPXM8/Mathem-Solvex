@@ -1,5 +1,5 @@
 // export default SingleQuestionPage;
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
 import ReactPlayer from 'react-player/youtube';
@@ -17,6 +17,8 @@ const SingleQuestionPage = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showExplanation, setShowExplanation] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
+    const explanationRef = useRef(null);
+    const feedbackRef = useRef(null);
 
     // This hook will re-render MathJax when the question or related questions are loaded
     useMathJax([question, relatedQuestions]);
@@ -52,7 +54,15 @@ const SingleQuestionPage = () => {
 
         fetchAllData();
     }, [id]);
-
+    useEffect(() => {
+    // If the answer has just been submitted, scroll to the feedback card
+    if (isSubmitted && feedbackRef.current) {
+        feedbackRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center' // 'center' provides a better viewing experience
+        });
+    }
+}, [isSubmitted]);
     const handleOptionSelect = (index) => {
         if (!isSubmitted) {
             setSelectedOption(index);
@@ -128,15 +138,17 @@ const SingleQuestionPage = () => {
                     
                     {!isSubmitted && (
                         <div className={styles.submitContainer}>
-                            <button onClick={handleSubmit} className={styles.submitBtn} disabled={selectedOption === null}>Check Answer</button>
+                            <button onClick={handleSubmit} className={styles.submitBtn} disabled={selectedOption === null}>Choose an Answer to solution</button>
                         </div>
                     )}
                 </div>
 
                 {isSubmitted && (
-                    <div className={styles.feedbackCard}>
+                    <div ref={feedbackRef} className={styles.feedbackCard}>
                         <p className={isCorrect ? styles.correctText : styles.incorrectText}>
-                            {isCorrect ? '✅ Correct Answer! Well done.' : '❌ Incorrect. The correct answer is highlighted in green.'}
+                            {isCorrect ? '✅ Correct Answer! Well done.' : "Oops! That's not correct. Please review the explanation for better understanding."
+
+}
                         </p>
                         <div className={styles.buttonGroup}>
                             <button onClick={handleToggleExplanation} className={styles.explanationBtn}>
@@ -153,7 +165,7 @@ const SingleQuestionPage = () => {
                 )}
 
                 {showExplanation && (
-                    <div className={styles.explanationBox}>
+                    <div ref={explanationRef} className={styles.explanationBox}>
                         <h3>Explanation</h3>
                         {question.explanationText ? <MathPreview latexString={question.explanationText} /> : <p>No text explanation available.</p>}
                         {question.explanationImageURL && <img src={question.explanationImageURL} alt="Explanation diagram" className={styles.mainImage} />}
