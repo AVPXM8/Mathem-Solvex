@@ -1,0 +1,80 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pageHeader {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+}
+.pageHeader h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.pageHeader p {
+    font-size: 1.2rem;
+    color: var(--slate-gray);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.postGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+.postCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.postContent {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.postCategory {
+    background-color: #eef2ff;
+    color: #4338ca;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-bottom: 15px;
+}
+
+.postTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.postExcerpt {
+    color: var(--slate-gray);
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.readMore {
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin-top: auto;
+}

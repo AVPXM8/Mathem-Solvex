@@ -10,10 +10,13 @@ import SingleQuestionPage from './pages/SingleQuestionPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import QuestionListPage from './pages/QuestionListPage';
-import AddQuestionPage from './pages/AddQuestionPage'; // Corrected import path
+import AddQuestionPage from './pages/AddQuestionPage'; 
 import ReportsPage from './pages/ReportsPage';
 import ReportIssuePage from './pages/ReportIssuePage';
-
+import PostListPage from './pages/PostListPage';
+import AddPostPage from './pages/AddPostPage';
+import ArticleListPage from './pages/ArticleListPage';
+import SinglePostPage from './pages/SinglePostPage';
 // --- Import Layout Components ---
 import AdminLayout from './components/AdminLayout';
 import PublicLayout from './components/PublicLayout';
@@ -39,6 +42,8 @@ function App() {
                 <Route path="questions" element={<QuestionLibraryPage />} />
                 <Route path="question/:id" element={<SingleQuestionPage />} />
                 <Route path="report-issue/:id" element={<ReportIssuePage />} />
+                <Route path="articles" element={<ArticleListPage />} />
+                <Route path="articles/:slug" element={<SinglePostPage />} />
             </Route>
 
             {/* === Authentication Route === */}
@@ -51,6 +56,9 @@ function App() {
                 <Route path="questions/add" element={<AddQuestionPage />} />
                 <Route path="questions/edit/:id" element={<AddQuestionPage />} />
                 <Route path="reports" element={<ReportsPage />} />
+                 <Route path="posts" element={<PostListPage />} />
+                 <Route path="posts/add" element={<AddPostPage />} />
+                <Route path="posts/edit/:id" element={<AddPostPage />} />
                 <Route index element={<Navigate to="dashboard" />} />
             </Route>
              {/* Any other URL that doesn't match will be redirected to the public homepage */}

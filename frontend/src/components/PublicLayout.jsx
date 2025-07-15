@@ -26,6 +26,7 @@ const PublicLayout = () => {
                         <NavLink to="/" className={({ isActive }) => isActive ? styles.active : ''}>Home</NavLink>
                         <NavLink to="/questions?exam=NIMCET" className={({ isActive }) => isActive ? styles.active : ''}>NIMCET</NavLink>
                         <NavLink to="/questions?exam=CUET PG" className={({ isActive }) => isActive ? styles.active : ''}>CUET PG</NavLink>
+                        <NavLink to="/articles" className={({ isActive }) => isActive ? styles.active : ''}>Articles</NavLink>
                         <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Our Courses</a>
                     </nav>
 
@@ -47,6 +48,7 @@ const PublicLayout = () => {
                         <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
                         <NavLink to="/questions?exam=NIMCET" onClick={() => setIsMenuOpen(false)}>NIMCET</NavLink>
                         <NavLink to="/questions?exam=CUET PG" onClick={() => setIsMenuOpen(false)}>CUET PG</NavLink>
+                            <NavLink to="/articles" onClick={() => setIsMenuOpen(false)}>Articles</NavLink>
                         <a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Our Courses</a>
                     </nav>
                 )}

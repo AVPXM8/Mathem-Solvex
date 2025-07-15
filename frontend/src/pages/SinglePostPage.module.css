@@ -1,0 +1,62 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.postHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category {
+    color: var(--primary-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.postHeader h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.meta {
+    color: var(--slate-gray);
+    font-size: 0.9rem;
+}
+.meta span:not(:last-child)::after {
+    content: ' • ';
+    margin: 0 10px;
+}
+
+.featuredImage {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.postContent {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+/* Add some basic styling for content coming from the editor */
+.postContent h2 { margin-top: 2em; margin-bottom: 1em; }
+.postContent h3 { margin-top: 1.5em; margin-bottom: 1em; }
+.postContent ul, .postContent ol { margin-left: 20px; margin-bottom: 1em; }
+.postContent blockquote { border-left: 3px solid var(--primary-blue); padding-left: 20px; margin: 1.5em 0; color: var(--slate-gray); font-style: italic; }
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: var(--slate-gray);
+}
