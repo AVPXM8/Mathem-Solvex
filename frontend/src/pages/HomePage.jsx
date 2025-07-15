@@ -1,59 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom'; // <--- STEP 1: ADD THIS IMPORT
 import styles from './HomePage.module.css';
 
-// Array of the images you want to display in the slider
-const promoImages = [
-    '/nimcet-2025-banner.jpg',
-    '/success-stories.jpg'
-];
+// Import Data and Components
+import { students } from '../data/students'; 
+import StudentCard from '../components/StudentCard';
+import SuccessCarousel from '../components/SuccessCarousel';
+
+const examTabs = ['All', ...new Set(students.map(s => s.exam))];
 
 const HomePage = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeTab, setActiveTab] = useState('All');
 
-    // This effect handles the auto-scrolling functionality
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prevSlide) => 
-                prevSlide === promoImages.length - 1 ? 0 : prevSlide + 1
-            );
-        }, 5000); // Change slide every 5 seconds
+  const filteredStudents = useMemo(() => {
+    if (activeTab === 'All') return students;
+    return students.filter(student => student.exam === activeTab);
+  }, [activeTab]);
 
-        return () => clearInterval(timer); // Cleanup the timer
-    }, []);
+  return (
+    <div className={styles.homePage}>
+      <SuccessCarousel />
 
-    return (
-        <>
-            <div className={styles.hero}>
-                <h1>Welcome to the Maarula Classes Question Bank</h1>
-                <p>Your one-stop destination for NIMCET, CUET PG, and JEE previous year questions and solutions.</p>
-                <div className={styles.buttonContainer}>
-                    <Link to="/questions?exam=NIMCET" className={styles.ctaButton}>Browse NIMCET Questions</Link>
-                    <Link to="/questions?exam=CUET PG" className={styles.ctaButton}>Browse CUET PG Questions</Link>
-                </div>
+      <section className={styles.resultsSection}>
+        {/* ... (This section remains the same) ... */}
+        <h2 className={styles.sectionTitle}>Meet Our 2025 Stars</h2>
+        <div className={styles.tabsContainer}>
+          {examTabs.map(tab => (
+            <button
+              key={tab}
+              className={`${styles.tabButton} ${activeTab === tab ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+        <div className={styles.resultsGrid}>
+          {filteredStudents.map(student => (
+            <StudentCard key={student.id} student={student} />
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 3: CALL TO ACTION HUB - NOW CORRECTED */}
+      <section className={styles.ctaHub}>
+        <h2 className={styles.sectionTitle}>The Tools Behind The Toppers</h2>
+        <p className={styles.ctaText}>
+          Our success is built on a foundation of strategic practice. Access our comprehensive question bank with detailed, expert-verified solutions and prepare with the confidence of a champion.
+        </p>
+        <div className={styles.ctaButtonContainer}>
+          {/* STEP 2: CHANGE <a> TO <Link> AND href TO to */}
+          <Link to="/questions?exam=NIMCET" className={styles.ctaButton}>
+            <strong>Explore NIMCET Bank</strong>
+            <span>10+ years of topic-wise papers</span>
+          </Link>
+          <Link to="/questions?exam=CUET-PG" className={styles.ctaButton}>
+            <strong>Access CUET-PG Bank</strong>
+            <span>Master concepts with detailed solutions</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* ... (The features section remains the same) ... */}
+       <section className={styles.featuresSection}>
+         <h2 className={styles.sectionTitle}>Why Maarula Classes?</h2>
+         <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+               <h3>Expert Solutions</h3>
+               <p>Accurate, in-depth solutions crafted by experienced faculty, not by AI.</p>
             </div>
-
-            {/*  This is the new Image Slider Section  */}
-            <div className={styles.sliderContainer}>
-                <div className={styles.sliderWrapper} style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                    {promoImages.map((imgSrc, index) => (
-                        <div className={styles.slide} key={index}>
-                            <img src={imgSrc} alt={`Promotion ${index + 1}`} />
-                        </div>
-                    ))}
-                </div>
-                <div className={styles.dotsContainer}>
-                    {promoImages.map((_, index) => (
-                        <button 
-                            key={index}
-                            className={`${styles.dot} ${currentSlide === index ? styles.activeDot : ''}`}
-                            onClick={() => setCurrentSlide(index)}
-                        ></button>
-                    ))}
-                </div>
+            <div className={styles.featureCard}>
+               <h3>Strategic Organization</h3>
+               <p>Target weak areas with questions organized by year, topic, and difficulty.</p>
             </div>
-        </>
-    );
+            <div className={styles.featureCard}>
+               <h3>Real Exam Simulation</h3>
+               <p>Practice with a platform that mimics the format and pressure of the real exam.</p>
+            </div>
+         </div>
+      </section>
+    </div>
+  );
 };
 
 export default HomePage;

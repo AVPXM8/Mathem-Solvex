@@ -1,99 +1,135 @@
- 
-/* src/pages/HomePage.module.css - FINAL VERSION */
-.hero { 
-    text-align: center; 
-    padding: 60px 20px; 
-    background: linear-gradient(180deg, #f1f5f9, #e0e7ff);
-    border-radius: 16px;
-}
-.hero h1 { 
-    font-size: 2.5rem; 
-    font-weight: 700; 
-    margin-bottom: 20px; 
-    color: var(--dark-navy); 
-}
-.hero p { 
-    font-size: 1.2rem; 
-    color: var(--slate-gray); 
-    max-width: 600px; 
-    margin: 0 auto 30px; 
-}
-.buttonContainer { 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
-    flex-wrap: wrap; 
-}
-.ctaButton { 
-    background-color: var(--primary-blue); 
-    color: white; 
-    text-decoration: none; 
-    padding: 15px 30px; 
-    border-radius: 8px; 
-    font-weight: 600; 
-    font-size: 1.1rem; 
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 87, 255, 0.2);
-}
-.ctaButton:hover { 
-    background-color: #0048d6; 
-    transform: translateY(-2px); 
+/* --- SHARED STYLES --- */
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem; /* Larger font size for desktop */
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #1e293b; /* Dark Blue-Gray */
+  line-height: 1.2;
 }
 
-/* --- New Image Slider Styles --- */
-.sliderContainer {
-    margin-top: 60px;
-    position: relative;
-    width: 100%;
-    max-width: 800px; /* Controls the max width of the slider */
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* --- RESULTS SECTION --- */
+.resultsSection {
+  padding: 0 20px 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tabsContainer {
+  display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.tabButton {
+  padding: 10px 20px; font-size: 1rem; font-weight: 600; border: none; border-radius: 8px; background-color: #f1f5f9; color: #475569; cursor: pointer; transition: all 0.3s ease;
+}
+.tabButton:hover { background-color: #e2e8f0; }
+.activeTab { background-color: #4f46e5; color: white; }
+.resultsGrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;
 }
 
-.sliderWrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+/* --- CALL TO ACTION (CTA) HUB --- */
+.ctaHub {
+  background-color: #f8fafc; /* A very light gray background */
+  padding: 60px 20px;
+  text-align: center;
+}
+.ctaText {
+  max-width: 600px;
+  margin: -20px auto 40px auto;
+  font-size: 1.1rem;
+  color: #334155;
+  line-height: 1.6;
+}
+.ctaButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ctaButton {
+  background-color: #4f46e5; /* Indigo */
+  color: white;
+  text-decoration: none;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: left;
+  transition: all 0.3s ease;
+  min-width: 280px;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.2);
+}
+.ctaButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.3);
+}
+.ctaButton strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.ctaButton span {
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
+/* --- FEATURES SECTION --- */
+.featuresSection {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+.featureCard {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+.featureCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #1e293b;
+}
+.featureCard p {
+  color: #475569;
+  line-height: 1.6;
 }
 
-.slide img {
-    width: 100%;
-    display: block;
-    aspect-ratio: 1 / 1; /* Ensures the slider keeps a square shape */
-    object-fit: cover; /* Makes sure the image fills the space nicely */
-}
 
-.dotsContainer {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.dot.activeDot {
-    background-color: var(--white);
-}
+/* --- MOBILE RESPONSIVE STYLES --- */
 
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2rem; }
-}
+  .sectionTitle {
+    font-size: 1.8rem; /* Make titles smaller on mobile */
+  }
 
+  .resultsSection,
+  .ctaHub,
+  .featuresSection {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .tabButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .resultsGrid {
+    gap: 20px; /* Reduce gap on mobile */
+  }
+
+  .ctaText {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .featureCard h3 {
+    font-size: 1.3rem;
+  }
+}
