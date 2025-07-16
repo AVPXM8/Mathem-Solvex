@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom'; // <--- STEP 1: ADD THIS IMPORT
+import { Link } from 'react-router-dom'; 
 import styles from './HomePage.module.css';
 
 // Import Data and Components
@@ -60,22 +60,20 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
-
-      {/* ... (The features section remains the same) ... */}
        <section className={styles.featuresSection}>
          <h2 className={styles.sectionTitle}>Why Maarula Classes?</h2>
          <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
-               <h3>Expert Solutions</h3>
-               <p>Accurate, in-depth solutions crafted by experienced faculty, not by AI.</p>
+               <h3>Expert Faculty</h3>
+               <p>Maarula classes has experienced faculty for every individual subject and specialized in the subject that they will teach you.</p>
             </div>
             <div className={styles.featureCard}>
                <h3>Strategic Organization</h3>
-               <p>Target weak areas with questions organized by year, topic, and difficulty.</p>
+               <p>We target weak areas with questions organized by year, topic, and difficulty. So that we can help the student as per there level form basic to advanced</p>
             </div>
             <div className={styles.featureCard}>
-               <h3>Real Exam Simulation</h3>
-               <p>Practice with a platform that mimics the format and pressure of the real exam.</p>
+               <h3>Real Exam Experience in our test series</h3>
+               <p>Practice with a platform that has the same exact format so that you can feel the real exam even before the exam.</p>
             </div>
          </div>
       </section>

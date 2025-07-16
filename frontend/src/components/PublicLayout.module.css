@@ -1,75 +1,9 @@
-/* src/components/PublicLayout.module.css - FINAL VERSION */
-.pageContainer { display: flex; flex-direction: column; min-height: 100vh; }
-.header { background: var(--white); box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; }
-.headerContent { display: flex; align-items: center; justify-content: space-between; gap: 15px; max-width: 1200px; margin: 0 auto; }
-
-.logoContainer { display: flex; align-items: center; gap: 15px; text-decoration: none; }
-.logo { height: 50px; }
-.title h1 { font-size: 1.5rem; font-weight: 600; color: var(--dark-navy); line-height: 1.2; }
-.title p { font-size: 0.9rem; color: var(--slate-gray); }
-
-.navLinks { display: flex; gap: 30px; }
-.navLinks a { color: var(--slate-gray); text-decoration: none; font-weight: 500; padding: 5px 0; border-bottom: 2px solid transparent; transition: all 0.2s; }
-.navLinks a:hover { color: var(--primary-blue); }
-.navLinks a.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
-
-.headerActions { display: flex; align-items: center; gap: 20px; }
-.loginButton { background-color: var(--primary-blue); color: white; text-decoration: none; padding: 10px 25px; border-radius: 8px; font-weight: 600; transition: background-color 0.2s; }
-.loginButton:hover { background-color: #0048d6; }
-
-.hamburger { display: none; /* Hidden on desktop */ font-size: 1.8rem; background: none; border: none; cursor: pointer; }
-.mobileNav { display: none; /* Hidden on desktop */ }
-
-.mainContent { flex-grow: 1; padding: 40px 20px; max-width: 1100px; width: 100%; margin: 0 auto; }
-.footer { background-color: #0f172a; color: #cbd5e1; padding: 50px 20px 20px; }
-/* New Footer Styles */
-.footer { background-color: #0f172a; color: #cbd5e1; padding: 50px 20px 20px; }
-.footerGrid { max-width: 1200px; margin: 0 auto 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
-.footerColumn h4 { color: white; font-size: 1.1rem; margin-bottom: 15px; }
-.footerColumn p { color: #94a3b8; line-height: 1.7; }
-.footerColumn a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.2s; }
-.footerColumn a:hover { color: white; }
-.footerColumn a i { margin-right: 10px; width: 20px; }
-.appLink img { height: 60px; }
-.footerBottom { text-align: center; border-top: 1px solid #334155; padding-top: 20px; font-size: 0.9rem; color: #94a3b8; }
-
-/* --- Responsive Styles for Mobile --- */
-@media (max-width: 768px) {
-    .navLinks { display: none; } /* Hide desktop nav */
-    .hamburger { display: block; } /* Show hamburger button */
-
-    .mobileNav {
-        display: flex;
-        flex-direction: column;
-        background: var(--white);
-        padding: 10px 2rem;
-        border-top: 1px solid var(--border-color);
-    }
-    .mobileNav a {
-        padding: 15px 0;
-        text-decoration: none;
-        color: var(--dark-navy);
-        font-weight: 500;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .mobileNav a:last-child {
-        border-bottom: none;
-    }
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-/* ADD THIS CODE TO THE BOTTOM OF YOUR CSS FILE */
 
-/* --- Responsive Styles for Mobile Footer --- */
-@media (max-width: 768px) {
-    .footerGrid {
-        /* This will center-align all text inside the footer columns on mobile */
-        text-align: center;
-        gap: 40px; /* This adds more vertical space between sections */
-    }
-
-    .footerColumn a {
-        /* This helps to center the icon and text together properly */
-        display: inline-flex; 
-        align-items: center;
-        justify-content: center;
-    }
+.mainContent {
+  flex-grow: 1; /* This ensures the footer stays at the bottom */
 }
