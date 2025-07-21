@@ -105,7 +105,7 @@ app.get('/sitemap.xml', async (req, res) => {
 // --- Serve Frontend Application in Production ---
 // This section correctly serves your built React app in production.
 if (process.env.NODE_ENV === 'production') {
-    const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
+     const frontendBuildPath = path.join(__dirname, 'frontend', 'dist');
     app.use(express.static(frontendBuildPath));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(frontendBuildPath, 'index.html'));
