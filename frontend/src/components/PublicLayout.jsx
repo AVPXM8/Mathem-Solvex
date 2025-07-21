@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './Header'; // Import the new Header
-import Footer from './Footer'; // Import the new Footer
+import Header from './Header'; 
+import Footer from './Footer'; 
+import FloatingSocialBar from './FloatingSocialBar';
 import styles from './PublicLayout.module.css';
 
 const PublicLayout = () => {
@@ -12,6 +13,7 @@ const PublicLayout = () => {
         <Outlet /> {/* This renders your HomePage, etc. */}
       </main>
       <Footer />
+      <FloatingSocialBar />
     </div>
   );
 };

@@ -6,7 +6,10 @@ import ReactPlayer from 'react-player/youtube';
 import useMathJax from '../hooks/useMathJax';
 import MathPreview from '../components/MathPreview';
 import { reRenderMathJax } from '../utils/mathjax';
+import { Helmet } from 'react-helmet-async';
 import styles from './SingleQuestionPage.module.css';
+import { QuestionListSkeleton } from '../components/SkeletonLoader';
+
 
 const SingleQuestionPage = () => {
     const { id } = useParams();
@@ -100,8 +103,33 @@ const SingleQuestionPage = () => {
 
     const isCorrect = question.options[selectedOption]?.isCorrect;
 
-    // The rest of the component will only render if 'question' is not null.
+const pageTitle = `${question.questionText.substring(0, 60).replace(/<[^>]+>/g, '')}... | Maarula Classes`;
+const pageDescription = `Detailed solution for ${question.subject} question from ${question.exam} ${question.year}. Includes text and video explanations.`;
+
+const acceptedAnswer = question.options.find(opt => opt.isCorrect);
+
+const qaSchema = {
+      "@context": "https://schema.org",
+      "@type": "QAPage",
+      "mainEntity": {
+        "@type": "Question",
+        "name": question.questionText.replace(/<[^>]+>/g, ''), // Plain text version of the question
+        "answerCount": question.options.length,
+        "acceptedAnswer": acceptedAnswer ? {
+          "@type": "Answer",
+          "text": acceptedAnswer.text.replace(/<[^>]+>/g, '') // Plain text version of the answer
+        } : undefined // If no correct answer is marked, don't include this field
+      }
+    };
     return (
+        <>
+        <Helmet>
+            <title>{pageTitle}</title>
+            <meta name="description" content={pageDescription} />
+            <script type="application/ld+json">
+                {JSON.stringify(qaSchema)}
+            </script>
+        </Helmet>
         <div className={styles.pageLayout}>
             <div className={styles.mainContent}>
                 <div className={styles.breadcrumb}>
@@ -201,6 +229,7 @@ const SingleQuestionPage = () => {
                 )}
             </aside>
         </div>
+        </>
     );
 };
 

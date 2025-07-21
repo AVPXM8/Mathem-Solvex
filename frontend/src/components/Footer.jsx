@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// Add FaGooglePlay to this import line
-import { FaYoutube, FaInstagram, FaTelegram, FaWhatsapp, FaFacebook, FaLinkedin, FaGooglePlay } from 'react-icons/fa';
 import { ArrowUp } from 'lucide-react';
 import styles from './Footer.module.css';
-
+import { FaGooglePlay } from 'react-icons/fa';
 // Back to Top Button Component (no changes needed here)
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,20 +36,10 @@ const Footer = () => {
         <img src="https://res.cloudinary.com/dwmj6up6j/image/upload/f_auto,q_auto,w_100/v1752683439/maarulalogo_lywhdo.png" alt="Maarula Classes Logo" className={styles.footerLogo} />
         <h3 className={styles.footerTitle}>MAARULA CLASSES</h3>
         <p className={styles.footerSubtitle}>MCA Entrance Coaching</p>
-        <div className={styles.socials}>
-            <span>Follow Us On Social Media</span>
-            <div className={styles.socialIcons}>
-              <a href="https://www.facebook.com/maarulaclasses.kanpur/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook /></a>
-              <a href="https://www.instagram.com/maarula_classes/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-              <a href="YOUR_YOUTUBE_LINK" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
-              <a href="https://www.linkedin.com/company/maarula-classes" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-            </div>
-        </div>
       </div>
       
       {/* Link Grid - No changes needed here */}
       <div className={styles.footerGrid}>
-        {/* ... all your footer columns ... */}
         <div className={styles.footerColumn}>
           <h4>Quick Links</h4>
           <ul>
@@ -109,11 +97,6 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         <p>© {new Date().getFullYear()} Maarula Classes. All Rights Reserved.</p>
       </div>
-      
-      {/* Floating Action Buttons */}
-      <a href="https://wa.me/919554548576" target="_blank" rel="noopener noreferrer" className={styles.whatsappFloat} aria-label="WhatsApp">
-        <FaWhatsapp />
-      </a>
       <BackToTopButton />
     </footer>
   );

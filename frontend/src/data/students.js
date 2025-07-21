@@ -7,14 +7,14 @@ export const students = [
     name: 'Akbar Alam', 
     rank: 'AIR-68', 
     exam: 'NIMCET', 
-    imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/v1752548253/AKBAR_ALAM_AIR_68_qsc8xv.jpg' // CORRECTED
+    imageUrl: 'https://res.cloudinary.com/dwmj6up6j/image/upload/v1752548253/AKBAR_ALAM_AIR_68_qsc8xv.jpg' 
   },
   { 
     id: 'nim-02', 
     name: 'Ankit Kumar', 
     rank: 'AIR-92', 
     exam: 'NIMCET', 
-    imageUrl:'https://res.cloudinary.com/dwmj6up6j/image/upload/v1752548268/ankit_singh_92_dbcaif.jpg' // CORRECTED
+    imageUrl:'https://res.cloudinary.com/dwmj6up6j/image/upload/v1752548268/ankit_singh_92_dbcaif.jpg' 
   },
   { 
     id: 'cupg-01', 

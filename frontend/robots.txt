@@ -1,0 +1,11 @@
+# Allow all friendly web crawlers to access the site
+User-agent: *
+Allow: /
+
+# Disallow crawlers from accessing the admin panel and login pages
+Disallow: /admin/
+Disallow: /login/
+Disallow: /portal-access-7531/
+
+# Location of the sitemap file
+Sitemap: https://maarulaclassesquestion-bank.onrender.com/sitemap.xml
