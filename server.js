@@ -30,7 +30,7 @@ app.set('trust proxy', 1);
 // This allows requests from your local frontend and your deployed frontend,
 // but blocks all other unknown origins in a production environment.
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://maarulaclassesquestion-bank.onrender.com'] // 
+    ? [process.env.PRODUCTION_URL]
     : ['http://localhost:5173']; // 
 
 const corsOptions = {
