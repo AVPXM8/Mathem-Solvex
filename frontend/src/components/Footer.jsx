@@ -45,9 +45,9 @@ const Footer = () => {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/articles">Blog</Link></li>
-            <li><a href="https://www.maarul.in/about-us" target="_blank" rel="noopener noreferrer">About</a></li>
-            <li><a href="https://www.maarul.in/contact-us" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
-            <li><a href="https://www.maarul.in/our-instructors" target="_blank" rel="noopener noreferrer">Faculty</a></li>
+            <li><a href="https://www.maarula.in/about" target="_blank" rel="noopener noreferrer">About</a></li>
+            <li><a href="https://www.maarula.in/contact-us" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+            <li><a href="https://maarula.in/faculty" target="_blank" rel="noopener noreferrer">Faculty</a></li>
           </ul>
         </div>
         <div className={styles.footerColumn}>
@@ -55,29 +55,29 @@ const Footer = () => {
           <ul>
             <li><Link to="/questions?exam=NIMCET">NIMCET</Link></li>
             <li><Link to="/questions?exam=CUET-PG">CUET PG</Link></li>
-            <li><a href="https://www.maarul.in/vitmee" target="_blank" rel="noopener noreferrer">VITMEE</a></li>
-            <li><a href="https://www.maarul.in/jamia" target="_blank" rel="noopener noreferrer">JAMIA</a></li>
-            <li><a href="https://www.maarul.in/mah-cet" target="_blank" rel="noopener noreferrer">MAH-CET</a></li>
+            <li><a href="https://maarula.in/vitmee/" target="_blank" rel="noopener noreferrer">VITMEE</a></li>
+            <li><a href="https://www.maarula.in/jamia" target="_blank" rel="noopener noreferrer">JAMIA</a></li>
+            <li><a href="https://www.maarula.in/mah-cet" target="_blank" rel="noopener noreferrer">MAH-CET</a></li>
           </ul>
         </div>
         <div className={styles.footerColumn}>
           <h4>Free Resources</h4>
           <ul>
             <li><Link to="/questions">Previous Year Papers</Link></li>
-            <li><a href="https://www.maarul.in/mock-tests" target="_blank" rel="noopener noreferrer">Free Mock Tests</a></li>
-            <li><a href="https://www.youtube.com/c/maarulaclasses" target="_blank" rel="noopener noreferrer">Strategy Videos</a></li>
-            <li><a href="https://www.maarul.in/preparation-tips" target="_blank" rel="noopener noreferrer">Preparation tips</a></li>
-            <li><a href="https://www.maarul.in/syllabus" target="_blank" rel="noopener noreferrer">Syllabus</a></li>
+            <li><a href="https://maarulaclasses.classx.co.in/test-series" target="_blank" rel="noopener noreferrer">Free Mock Tests</a></li>
+            <li><a href="https://www.youtube.com/channel/UCbwZSQOJnn9ZkkT3dTiUCWg" target="_blank" rel="noopener noreferrer">Strategy Videos</a></li>
+            <li><a href="https://www.youtube.com/channel/UCbwZSQOJnn9ZkkT3dTiUCWg" target="_blank" rel="noopener noreferrer">Preparation tips</a></li>
+            <li><a href="https://maarula.in/resources/" target="_blank" rel="noopener noreferrer">Syllabus</a></li>
           </ul>
         </div>
         <div className={styles.footerColumn}>
           <h4>Our Courses</h4>
           <ul>
             <li><a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Live Classes</a></li>
-            <li><a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Recorded Lectures</a></li>
-            <li><a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Test Series</a></li>
-            <li><a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Sectional Quiz</a></li>
-            <li><a href="https://maarulaclasses.classx.co.in/new-courses" target="_blank" rel="noopener noreferrer">Comprehensive Notes</a></li>
+            <li><a href="https://www.youtube.com/@MaarulaClasses/playlists" target="_blank" rel="noopener noreferrer">Recorded Lectures</a></li>
+            <li><a href="https://maarulaclasses.classx.co.in/test-series" target="_blank" rel="noopener noreferrer">Test Series</a></li>
+            <li><a href="https://maarulaclasses.classx.co.in/test-series" target="_blank" rel="noopener noreferrer">Sectional Quiz</a></li>
+            <li><a href="https://maarulaclasses.classx.co.in/books" target="_blank" rel="noopener noreferrer">Comprehensive Notes</a></li>
           </ul>
         </div>
       </div>
