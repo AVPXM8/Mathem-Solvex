@@ -23,9 +23,25 @@ const AddQuestionPage = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const resetForm = () => {
+    setFormData({
+        exam: 'NIMCET', subject: '', topic: '', year: new Date().getFullYear(),
+        questionText: '', explanationText: '', videoURL: '',
+        options: [
+            { text: '', imageURL: '', isCorrect: true },
+            { text: '', imageURL: '', isCorrect: false },
+            { text: '', imageURL: '', isCorrect: false },
+            { text: '', imageURL: '', isCorrect: false },
+        ],
+    });
+    setImageFiles({});
+    // We can also reset the file inputs visually if needed, but this handles the state
+};
+
     const auth = useAuth();
     const navigate = useNavigate();
     const tinymceApiKey = import.meta.env.VITE_TINYMCE_API_KEY;
+
 
     useEffect(() => {
         if (isEditMode) {
@@ -79,21 +95,24 @@ const AddQuestionPage = () => {
                 submissionData.append(key, imageFiles[key]);
             }
         }
-        try {
-            if (isEditMode) {
-                await api.put(`/questions/${id}`, submissionData);
-                toast.success('Question updated successfully!');
-            } else {
-                await api.post('/questions', submissionData);
-                toast.success('Question added successfully!');
-            }
-            navigate('/admin/questions');
-        } catch (err) {
-            setError('Failed to save question. Please review all fields.');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
+       try {
+    if (isEditMode) {
+        // In Edit Mode, update the question and navigate back to the list
+        await api.put(`/questions/${id}`, submissionData);
+        toast.success('Question updated successfully!');
+        navigate('/admin/questions');
+    } else {
+        // In Add Mode, create the question and then reset the form
+        await api.post('/questions', submissionData);
+        toast.success('Question added successfully! Ready for the next one.');
+        resetForm(); // Call the reset function
+    }
+} catch (err) {
+    setError('Failed to save question. Please review all fields.');
+    console.error(err);
+} finally {
+    setLoading(false);
+}
     };
     // --- End of handler functions ---
     // configuration for the tinymice editor
