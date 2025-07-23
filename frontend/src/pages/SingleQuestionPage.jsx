@@ -91,6 +91,7 @@ const SingleQuestionPage = () => {
 };
 
 
+
     // This is the crucial fix. We show a loading message until the data is ready.
     if (loading) {
         return <div className={styles.loading}>Loading Question...</div>;
