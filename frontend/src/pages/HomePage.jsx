@@ -22,7 +22,7 @@ const HomePage = () => {
       <SuccessCarousel />
 
       <section className={styles.resultsSection}>
-        {/* ... (This section remains the same) ... */}
+        
         <h2 className={styles.sectionTitle}>Meet Our 2025 Stars</h2>
         <div className={styles.tabsContainer}>
           {examTabs.map(tab => (

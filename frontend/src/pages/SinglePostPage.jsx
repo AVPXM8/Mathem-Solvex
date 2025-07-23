@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../api';
 import useMathJax from '../hooks/useMathJax';
-import { Helmet } from 'react-helmet-async'; // For SEO
+import { Helmet } from 'react-helmet-async'; 
 import styles from './SinglePostPage.module.css';
 
 const SinglePostPage = () => {
@@ -29,13 +29,41 @@ const SinglePostPage = () => {
 
     if (loading) return <div className={styles.loading}>Loading Article...</div>;
     if (!post) return <div className={styles.loading}>Article not found.</div>;
+    const pageTitle = `${post.title} | Maarula Classes`;
+    const pageDescription = post.metaDescription || post.content.substring(0, 160).replace(/<[^>]+>/g, '');
+
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": pageDescription,
+        "image": post.featuredImage || "/maarulalogo.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Maarula Classes"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Maarula Classes",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://questions.maarula.in/maarulalogo.png"
+            }
+        },
+        "datePublished": post.createdAt,
+        "dateModified": post.updatedAt
+    };
 
     return (
         <>
             {/* This adds dynamic Title and Description tags to the page for SEO */}
-            <Helmet>
-                <title>{`${post.title} | Maarula Classes`}</title>
-                <meta name="description" content={post.metaDescription || post.content.substring(0, 160).replace(/<[^>]+>/g, '')} />
+           <Helmet>
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDescription} />
+                <link rel="canonical" href={`https://questions.maarula.in/articles/${post.slug}`} />
+                <script type="application/ld+json">
+                    {JSON.stringify(articleSchema)}
+                </script>
             </Helmet>
 
             <article className={styles.container}>
